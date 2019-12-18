@@ -63,7 +63,7 @@ CREATE TABLE weightclasses (
 );
 
 CREATE TABLE fighters (
-    	id INT NOT NULL AUTO_INCREMENT,
+    id INT NOT NULL AUTO_INCREMENT,
     
     first_name VARCHAR( 100 ) NOT NULL,
     last_name VARCHAR( 100 ) NOT NULL,
@@ -90,7 +90,7 @@ CREATE TABLE fighters (
 );
 
 CREATE TABLE events (
-    	id INT NOT NULL AUTO_INCREMENT,
+    id INT NOT NULL AUTO_INCREMENT,
 
     name VARCHAR( 200 ) NOT NULL,
     date DATE NOT NULL,
@@ -108,7 +108,7 @@ CREATE TABLE events (
 );
 
 CREATE TABLE fights (
-    	id INT NOT NULL AUTO_INCREMENT, 
+    id INT NOT NULL AUTO_INCREMENT, 
 
     fighter_id INT NOT NULL,
     opponent_id INT NOT NULL,
