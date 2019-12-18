@@ -5,7 +5,7 @@ require_once 'database.php';
 $_SESSION['logged_id'] = 2;
 if(isset($_SESSION['logged_id']))
 {
-	$eventsQuery = $db->query('SELECT events.id, events.name, events.date, events.date, locations.name loc, organizations.name org
+	$eventsQuery = $db->query('SELECT events.id, events.name, events.date, locations.city loc, organizations.name org
 								  FROM events LEFT JOIN organizations ON events.organization_id = organizations.id
                                   LEFT JOIN locations ON events.location_id = locations.id');
 	$events = $eventsQuery->fetchAll();
