@@ -9,7 +9,6 @@
 	else
 	{
 		
-		echo $_SESSION['logged_id'];
 		$admin_id = $_SESSION['logged_id'];
 		$date =date("Y-m-d H:i:s");
 		
