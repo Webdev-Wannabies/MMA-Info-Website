@@ -8,5 +8,5 @@
 <form method="post" action="panel.php">
 		<input type="text" name="login" placeholder="login">
 		<input type="password" name="password" placeholder="password">
-		<input type="submit" value="sign in" >
+		<input type="submit" value="sign in" class="panel_part_small" >
 </form>

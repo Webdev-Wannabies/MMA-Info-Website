@@ -143,5 +143,5 @@ else
 					<input type="text" name="end_round" value="<?php echo $end_round ?>" >
 					<input type="text" name="end_time" value="<?php echo $end_time ?>" >
 					
-					<input type="submit" value="<?php  echo $buttonText  ?>" >
+					<input type="submit" class="panel_part_small" value="<?php  echo $buttonText  ?>" >
 			</form>

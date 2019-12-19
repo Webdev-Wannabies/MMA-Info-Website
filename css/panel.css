@@ -35,10 +35,11 @@ select
 	border: 0.1rem;
 	border-style: solid;
 	
-	padding-left: 0.2%;
-	padding-right: 1%;
-	padding-top:0.2%;
-	padding-bottom: 0.2%;
+	padding-left: 0.25%;
+	padding-right: 0.25%;
+	padding-top:0.25%;
+	padding-bottom: 0.25%;
+	
 }
 
 
@@ -97,41 +98,10 @@ td
 }
 
 label
-{
-	float:right;
-	display:inline;
-	
+{	
 	background-color: gray;
 	color: black;
 	
-	padding-left: 1%;
-	padding-right: 1%;
-	padding-top:0.2%;
-	padding-bottom: 0.2%;
-	
-	margin-left: 0.1%;
-	margin-right: 0.1%;
-	margin-top: 1.0%;
-	margin-bottom: 1.0%;
-	
-	text-align: center;
-
-	border: 0.1rem;
-	border-radius: 5px;
-	border-style: solid;
-	border-color: black;
-}
-
-[type=left]
-{
-	float:left;
-	display:inline;
-}
-
-[type=right]
-{
-	float:right;
-	display:inline;
 }
 
 input[type=submit],
@@ -139,23 +109,6 @@ input[type=submit],
 {
 	background-color: white;
 	color: black;
-	
-	padding-left: 1%;
-	padding-right: 1%;
-	padding-top:0.2%;
-	padding-bottom: 0.2%;
-	
-	margin-left: 0.1%;
-	margin-right: 0.1%;
-	margin-top: 1.0%;
-	margin-bottom: 1.0%;
-	
-	text-align: center;
-
-	border: 0.1rem;
-	border-radius: 5px;
-	border-style: outset;
-	border-color: black;
 	
 	cursor: pointer;
 	
@@ -178,40 +131,28 @@ input[type=submit],
 	
 }
 
-
 .content
 {
-	width:90%;
-	height: auto;
-
+	width: 90%;
 	background-color: darkgray;
-	
-	margin-left: auto;
-	margin-right: auto;
-	
-	
-	padding-left: 4%;
-	padding-right: 4%;
-	padding-top:0.5%;
-	padding-bottom: 0.5%;
-	
-	border: 0.25rem;
-	border-radius: 10px;
-	border-style: outset;
 	
 }
 
 .top
 {
-	width:90%;
-	height: 10%;
-
-	overflow: hidden;
-	
+	width: 90%;
 	background-color: red;
 	
+	overflow: hidden;
+	
+}
+
+.panel_part
+{
 	margin-left: auto;
 	margin-right: auto;
+	margin-top: 0.5%;
+	margin-bottom: 0.5%;
 	
 	padding-left: 4%;
 	padding-right: 4%;
@@ -221,4 +162,34 @@ input[type=submit],
 	border: 0.25rem;
 	border-radius: 10px;
 	border-style: outset;
+}
+
+.panel_part_small
+{
+	padding-left: 1%;
+	padding-right: 1%;
+	padding-top:0.2%;
+	padding-bottom: 0.2%;
+	
+	margin-left: 0.1%;
+	margin-right: 0.1%;
+	margin-top: 1.0%;
+	margin-bottom: 1.0%;
+
+	border: 0.1rem;
+	border-radius: 5px;
+	border-style: outset;
+	border-color: black;
+}
+
+[type=left]
+{
+	float:left;
+	display:inline;
+}
+
+[type=right]
+{
+	float:right;
+	display:inline;
 }

@@ -128,5 +128,5 @@ else
 								<option value= "<?php echo $association['id'] ?>" > <?php echo $association['name'] ?> </option>
 						<?php endforeach ?>
 					</select>
-					<input type="submit" value="<?php  echo $buttonText  ?>" >
+					<input type="submit"  class="panel_part_small" value="<?php  echo $buttonText  ?>" >
 			</form>

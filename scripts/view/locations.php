@@ -75,5 +75,5 @@ else
 								<option value= "<?php echo $country['id'] ?>" > <?php echo $country['name'] ?> </option>
 						<?php endforeach ?>
 					</select>
-					<input type="submit" value="<?php  echo $buttonText  ?>" >
+					<input type="submit" class="panel_part_small" value="<?php  echo $buttonText  ?>" >
 			</form>

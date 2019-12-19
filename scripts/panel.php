@@ -89,8 +89,7 @@ if( !isset($_SESSION['logged_id']) )
 </head> 
 <body>
 	<div class="container">
-		<header>
-			<div class="top">
+			<div class="top panel_part">
 				<?php
 					if( isset($_SESSION['logged_id']) )
 					{
@@ -126,9 +125,7 @@ if( !isset($_SESSION['logged_id']) )
 				}
 				?>
 			</div>
-		</header>
-		<main>
-			<div class="content">
+			<div class="content panel_part">
 				<?php
 				if( isset( $_GET['type'] ) && !empty( $_GET['type'] ) )
 				{			
@@ -137,11 +134,6 @@ if( !isset($_SESSION['logged_id']) )
 				}
 				?>
 			</div>
-		</main>
-		<div class="footer">
-		
-		</div>
-		
 		
 	</div>
 </body>

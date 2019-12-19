@@ -63,5 +63,5 @@ else
 				
 			 <form method="post" action="<?php echo $action ?>">
 					<input type="text" name="description" value="<?php echo $result_typeName  ?>" >
-					<input type="submit" value="<?php  echo $buttonText  ?>" >
+					<input type="submit" class="panel_part_small" value="<?php  echo $buttonText  ?>" >
 			</form>
