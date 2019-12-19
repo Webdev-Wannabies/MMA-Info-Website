@@ -17,11 +17,10 @@
 		$height = filter_input(INPUT_POST, 'height');
 		$weight = filter_input(INPUT_POST, 'weight');
 		$country_id = filter_input(INPUT_POST, 'country_id');
-		$organization_id = filter_input(INPUT_POST, 'organization_id');
 		$association_id = filter_input(INPUT_POST, 'association_id');
 
 		
-		$userQuery = $db->prepare("INSERT INTO fighters(id, first_name, last_name, nickname, birthdate, height, weight, country_id, organization_id, association_id) VALUES (null, :first_name,  :last_name, :nickname, :birthdate, :height, :weight, :country_id, :organization_id, :association_id)");
+		$userQuery = $db->prepare("INSERT INTO fighters(id, first_name, last_name, nickname, birthdate, height, weight, country_id,  association_id) VALUES (null, :first_name,  :last_name, :nickname, :birthdate, :height, :weight, :country_id, :association_id)");
 		$userQuery->bindValue(':first_name', $first_name, PDO::PARAM_STR);
 		$userQuery->bindValue(':last_name', $last_name, PDO::PARAM_STR);
 		$userQuery->bindValue(':nickname', $nickname, PDO::PARAM_STR);
@@ -29,7 +28,6 @@
 		$userQuery->bindValue(':height', $height, PDO::PARAM_STR);
 		$userQuery->bindValue(':weight', $weight, PDO::PARAM_STR);
 		$userQuery->bindValue(':country_id', $country_id, PDO::PARAM_STR);
-		$userQuery->bindValue(':organization_id', $organization_id, PDO::PARAM_STR);
 		$userQuery->bindValue(':association_id', $association_id, PDO::PARAM_STR);
 		$userQuery->execute();
 		

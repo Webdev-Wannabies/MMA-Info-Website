@@ -6,10 +6,9 @@ require_once 'database.php';
 if(isset($_SESSION['logged_id']))
 {
 	$fightersQuery = $db->query('SELECT fighters.id, fighters.first_name, fighters.last_name, fighters.nickname,
-                                  fighters.birthdate, fighters.height, fighters.weight, countries.name countryname, organizations.name orgname,
+                                  fighters.birthdate, fighters.height, fighters.weight, countries.name countryname,
 								  associations.name asocname
 								  FROM fighters LEFT JOIN countries ON fighters.country_id = countries.id 
-								  LEFT JOIN organizations ON fighters.organization_id = organizations.id 
 								  LEFT JOIN associations ON fighters.association_id = associations.id');
 	$fighters = $fightersQuery->fetchAll();
 	
@@ -32,7 +31,7 @@ else
 
 			<table>
 					<thead>
-						<tr><th>ID</th><th>FIRST NAME </th><th>LAST NAME </th><th>NICKNAME </th><th>BIRTHDATE</th><th>HEIGHT</th><th>WEIGHHT</th><th>COUNTRY</th><th>ORGANIZATION</th><th>ASSOCIATION</th><th>PICTURE</th><th colspan = 2>Operations</th></tr>
+						<tr><th>ID</th><th>FIRST NAME </th><th>LAST NAME </th><th>NICKNAME </th><th>BIRTHDATE</th><th>HEIGHT</th><th>WEIGHHT</th><th>COUNTRY</th><th>ASSOCIATION</th><th>PICTURE</th><th colspan = 2>Operations</th></tr>
 					</thead>
 					<tbody>
 					<?php foreach ($fighters as $fighter) : ?>
@@ -45,7 +44,6 @@ else
 								<td><?php echo $fighter['height']; ?></td>
 								<td><?php echo $fighter['weight']; ?></td>
 								<td><?php echo $fighter['countryname']; ?></td>
-								<td><?php echo $fighter['orgname']; ?></td>
 								<td><?php echo $fighter['asocname']; ?></td>
 								<td><img src = "<?php echo '../img/fighters/profile/' . strtolower( $fighter['first_name'] . '_'. $fighter['last_name'] ) . '.png' ?>" class = "picture"/></td>
 								<td>
@@ -79,7 +77,6 @@ else
 							$weight = $fighter['weight'];
 							$height = $fighter['height'];
 							$country = $fighter['countryname'];
-							$organization = $fighter['orgname'];
 							$association = $fighter['asocname'];
 							
 						}
@@ -98,8 +95,6 @@ else
 					$birthdate = "";
 					$weight = "";
 					$height = "";
-					$country = "";
-					$organization = "";
 					$association = "";
 
 				}
@@ -116,11 +111,6 @@ else
 					<select name="country_id" > country </option>
 						<?php foreach ($countries as $country): ?>
 								<option value= "<?php echo $country['id'] ?>" > <?php echo $country['name'] ?> </option>
-						<?php endforeach ?>
-					</select>
-					<select name="organization_id" > organization </option>
-						<?php foreach ($organizations as $organization): ?>
-								<option value= "<?php echo $organization['id'] ?>" > <?php echo $organization['name'] ?> </option>
 						<?php endforeach ?>
 					</select>
 					<select name="association_id" > association </option>
