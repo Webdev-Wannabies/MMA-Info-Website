@@ -18,18 +18,6 @@ else
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-	<meta charset="utf-8">
-	<title> weightclasses </title>
-</head> 
-<body>
-			<header>
-				<div class="top">
-				<?php require_once('panel/top.php') ?>
-				</div>
-			</header>
 			<table>
 					<thead>
 						<tr><th>ID</th><th>LOWER LIMIT</th><th>UPPER LIMIT</th><th>NAME</th><th>ORGANIZATION</th> <th colspan = 2>Operations</th></tr>
@@ -103,8 +91,3 @@ else
 					
 					<input type="submit" value="<?php  echo $buttonText  ?>" >
 			</form>
-			
-		</main>
-	</div>
-</body>
-</html>

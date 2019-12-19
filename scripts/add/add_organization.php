@@ -11,8 +11,9 @@
 		$name = filter_input(INPUT_POST, 'name');
 		$description = filter_input(INPUT_POST, 'description');
 		
-		$userQuery = $db->prepare("INSERT INTO organizations (id, name) VALUES(null,:name,:description)");
+		$userQuery = $db->prepare("INSERT INTO organizations (id, name, description) VALUES(null,:name,:description)");
 		$userQuery->bindValue(':name', $name, PDO::PARAM_STR);
+		$userQuery->bindValue(':description', $description, PDO::PARAM_STR);
 		$userQuery->execute();
 		
 		header('Location: ../panel.php?type=organizations');

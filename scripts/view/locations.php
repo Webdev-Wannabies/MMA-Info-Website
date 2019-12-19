@@ -19,18 +19,6 @@ else
 	
 ?>
 
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-	<meta charset="utf-8">
-	<title> locations </title>
-</head> 
-<body>
-			<header>
-				<div class="top">
-				<?php require_once('panel/top.php') ?>
-				</div>
-			</header>
 			<table>
 					<thead>
 						<tr><th>ID</th><th>Country</th><th>City</th><th colspan = 2>Operations</th></tr>
@@ -89,8 +77,3 @@ else
 					</select>
 					<input type="submit" value="<?php  echo $buttonText  ?>" >
 			</form>
-			
-		</main>
-	</div>
-</body>
-</html>

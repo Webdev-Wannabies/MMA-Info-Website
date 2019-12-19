@@ -18,7 +18,7 @@ else
 			<table>
 				
 					<thead>
-						<tr><th>ID</th><th>Name</th><th colspan = 2>Operations</th></tr>
+						<tr><th>ID</th><th>Name</th><th>Flag</th><th colspan = 2>Operations</th></tr>
 					</thead>
 					<tbody>
 					<?php foreach ($countries as $country) : ?>

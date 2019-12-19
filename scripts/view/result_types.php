@@ -16,18 +16,6 @@ else
 	
 ?>
 
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-	<meta charset="utf-8">
-	<title> result_types </title>
-</head> 
-<body>
-			<header>
-				<div class="top">
-					<?php require_once('panel/top.php') ?>
-				</div>
-			</header>
 			<table>
 					<thead>
 						<tr><th>ID</th><th>Description</th><th colspan = 2>Operations</th></tr>
@@ -77,8 +65,3 @@ else
 					<input type="text" name="description" value="<?php echo $result_typeName  ?>" >
 					<input type="submit" value="<?php  echo $buttonText  ?>" >
 			</form>
-			
-		</main>
-	</div>
-</body>
-</html>

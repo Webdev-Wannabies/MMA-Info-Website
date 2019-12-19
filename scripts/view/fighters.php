@@ -30,21 +30,9 @@ else
 	
 ?>
 
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-	<meta charset="utf-8">
-	<title> fighters </title>
-</head> 
-<body>
-			<header>
-				<div class="top">
-				<?php require_once('panel/top.php') ?>
-				</div>
-			</header>
 			<table>
 					<thead>
-						<tr><th>ID</th><th>FIRST NAME </th><th>LAST NAME </th><th>NICKNAME </th><th>BIRTHDATE</th><th>HEIGHT</th><th>WEIGHHT</th><th>COUNTRY </th><th>ORGANIZATION</th><th>ASSOCIATION</th><th colspan = 2>Operations</th></tr>
+						<tr><th>ID</th><th>FIRST NAME </th><th>LAST NAME </th><th>NICKNAME </th><th>BIRTHDATE</th><th>HEIGHT</th><th>WEIGHHT</th><th>COUNTRY</th><th>ORGANIZATION</th><th>ASSOCIATION</th><th>PICTURE</th><th colspan = 2>Operations</th></tr>
 					</thead>
 					<tbody>
 					<?php foreach ($fighters as $fighter) : ?>
@@ -59,7 +47,7 @@ else
 								<td><?php echo $fighter['countryname']; ?></td>
 								<td><?php echo $fighter['orgname']; ?></td>
 								<td><?php echo $fighter['asocname']; ?></td>
-								<td><img src = "<?php echo '../img/fighters/profile/' . strtolower( $fighter['first_name'] . '_'. $fighter['last_name'] ) . '.png' ?> " class = "flag"/></td>
+								<td><img src = "<?php echo '../img/fighters/profile/' . strtolower( $fighter['first_name'] . '_'. $fighter['last_name'] ) . '.png' ?>" class = "picture"/></td>
 								<td>
 									<a href="panel.php?type=fighters&id=<?php echo $fighter['id'];  ?>">Edit</a>
 								</td>
@@ -118,7 +106,6 @@ else
 			?>
 				
 			 <form method="post" action="<?php echo $action ?>">
-					<input type="text" name="id" value="<?php echo $id ?>" >
 					<input type="text" name="first_name" value="<?php echo $firstname ?>" >
 					<input type="text" name="last_name" value="<?php echo $lastname ?>" >
 					<input type="text" name="nickname" value="<?php echo $nickname ?>" >
@@ -143,8 +130,3 @@ else
 					</select>
 					<input type="submit" value="<?php  echo $buttonText  ?>" >
 			</form>
-			
-		</main>
-	</div>
-</body>
-</html>

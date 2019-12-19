@@ -3,81 +3,78 @@
 session_start();
 require_once 'database.php';
 
-function setErrorAndExit() 
-{
-    $_SESSION['bad_attempt'] = true;
-		
-	header('Location: admin.php'); 
-	exit();
-}
-
-if(!isset($_SESSION['logged_id']))
+if( !isset($_SESSION['logged_id']) )
 {
 	if( !isset( $_POST['login'] ) || !isset( $_POST['password'] ) )
-	{	
-		setErrorAndExit();
-	}
-	
-	if( empty( $_POST['login'] ) ) 
 	{
-		$_SESSION["empty_login"] = true;
-	}
-
-	if( empty( $_POST['password'] ) )
-	{
-		$_SESSION["empty_password"] = true;
-	}
-	
-	if( isset( $_SESSION["empty_login"] ) || isset( $_SESSION["empty_password"] ) )
-	{
-		setErrorAndExit();
-	}
-	
-	$login = filter_input(INPUT_POST, 'login');
-	$password = filter_input(INPUT_POST, 'password');
-	    	
-	$userQuery = $db->prepare('SELECT id, password FROM admins WHERE login = :login');
-	$userQuery->bindValue(':login', $login, PDO::PARAM_STR);
-	$userQuery->execute();
-	$user = $userQuery->fetch();
-		
-	if($user)
-	{	
-		if( password_verify($password, $user['password']) ) 
-		{		
-				
-			$_SESSION['logged_id'] = $user['id'];
-			UNSET($_SESSION['bad_attempt']);
-			
-			$sessionQuery = $db->prepare('INSERT INTO sessions( id, admin_id, session_start, session_end ) VALUES ( null, :admin_id, :session_start, null )');
-			$sessionQuery->bindValue(':admin_id', $user['id'], PDO::PARAM_STR);
-			
-			$session_start = date("Y-m-d H:i:s");
-			$sessionQuery->bindValue(':session_start',  $session_start);
-			$sessionQuery->execute();
-			
-			$sessionQuery = $db->prepare('SELECT id FROM sessions WHERE admin_id = :admin_id AND session_start = :session_start');
-			$sessionQuery->bindValue(':admin_id', $user['id'], PDO::PARAM_STR);
-			$sessionQuery->bindValue(':session_start', $session_start );
-			$sessionQuery->execute();
-			
-			$session = $sessionQuery->fetch();
-			
-			$_SESSION['session_id'] = $session['id'];
-		}
-		else
-		{
-			$_SESSION["wrong_password"] = true;
-			
-			setErrorAndExit();
-		}
+		unset($_SESSION['bad_attempt']);
+		unset($_SESSION['empty_login']);
+		unset($_SESSION['empty_password']);
+		unset($_SESSION['wrong_login']);
+		unset($_SESSION['wrong_password']);
 	}
 	else
 	{
-		$_SESSION["wrong_login"] = true;
-			
-		setErrorAndExit();
+		if( empty( $_POST['login'] ) ) 
+		{
+			$_SESSION["empty_login"] = true;
+		}
+
+		if( empty( $_POST['password'] ) )
+		{
+			$_SESSION["empty_password"] = true;
+		}
 		
+		if( empty( $_SESSION["empty_login"] ) || empty( $_SESSION["empty_password"] ) )
+		{
+			 $_SESSION['bad_attempt'] = true; 
+		}
+		
+		$login = filter_input(INPUT_POST, 'login');
+		$password = filter_input(INPUT_POST, 'password');
+				
+		$userQuery = $db->prepare('SELECT id, password FROM admins WHERE login = :login');
+		$userQuery->bindValue(':login', $login, PDO::PARAM_STR);
+		$userQuery->execute();
+		$user = $userQuery->fetch();
+			
+		if($user)
+		{	
+			if( password_verify($password, $user['password']) ) 
+			{		
+					
+				$_SESSION['logged_id'] = $user['id'];
+				$_SESSION['login'] = $login;
+				
+				UNSET($_SESSION['bad_attempt']);
+				
+				$sessionQuery = $db->prepare('INSERT INTO sessions( id, admin_id, session_start, session_end ) VALUES ( null, :admin_id, :session_start, null )');
+				$sessionQuery->bindValue(':admin_id', $user['id'], PDO::PARAM_STR);
+				
+				$session_start = date("Y-m-d H:i:s");
+				$sessionQuery->bindValue(':session_start',  $session_start);
+				$sessionQuery->execute();
+				
+				$sessionQuery = $db->prepare('SELECT id FROM sessions WHERE admin_id = :admin_id AND session_start = :session_start');
+				$sessionQuery->bindValue(':admin_id', $user['id'], PDO::PARAM_STR);
+				$sessionQuery->bindValue(':session_start', $session_start );
+				$sessionQuery->execute();
+				
+				$session = $sessionQuery->fetch();
+				
+				$_SESSION['session_id'] = $session['id'];
+			}
+			else
+			{
+				$_SESSION["wrong_password"] = true;
+				$_SESSION['bad_attempt'] = true; 
+			}
+		}
+		else
+		{
+			$_SESSION["wrong_login"] = true;
+			$_SESSION['bad_attempt'] = true;
+		}
 	}
 } 
 
@@ -87,13 +84,47 @@ if(!isset($_SESSION['logged_id']))
 <html lang="pl">
 <head>
 	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="../css/panel.css">
 	<title> admin-panel </title>
 </head> 
 <body>
 	<div class="container">
 		<header>
 			<div class="top">
-				<?php require_once('panel/top.php') ?>
+				<?php
+					if( isset($_SESSION['logged_id']) )
+					{
+						require_once('panel/top.php');
+					}
+					else
+					{
+						require_once('panel/login.php');
+						
+						if ( isset($_SESSION['bad_attempt']) ) 
+						{
+							echo "Error! ";
+
+							if( isset($_SESSION['empty_login']) )
+							{
+								echo "Empty login! ";
+							}
+							if( isset($_SESSION['empty_password']) )
+							{
+								echo "Empty password! ";
+							}
+											
+							if( isset($_SESSION['wrong_login']) )
+							{
+								echo "Wrong login! ";
+							}
+											
+							if( isset($_SESSION['wrong_password']) )
+							{
+								echo "Wrong password! ";
+							}
+						}				
+				}
+				?>
 			</div>
 		</header>
 		<main>
