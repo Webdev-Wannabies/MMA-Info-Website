@@ -9,5 +9,5 @@
 <a href="panel.php?type=result_types" class = "button panel_part_small" type ="left"> Result Types </a>
 <a href="panel.php?type=news" class = "button panel_part_small" type ="left"> News </a>
 <a href="panel/logout.php" class = "button panel_part_small" type ="right"> Logout </a>
-<label class = "panel_part_small" type ="right">  <?php  echo $_SESSION['login'] ?>  </label>
+
 	

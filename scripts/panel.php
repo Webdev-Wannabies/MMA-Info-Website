@@ -88,7 +88,23 @@ if( !isset($_SESSION['logged_id']) )
 	<title> admin-panel </title>
 </head> 
 <body>
-	<div class="container">
+	<div class= "header panel_part">
+		<label class = "panel_part_small" type = "left">  
+			<?php  
+				if( isset( $_SESSION['login'] ))
+				{
+					echo $_SESSION['login'];
+				}
+				else
+				{
+					echo '';
+				}
+				
+			?>  
+		</label>
+	</div>
+	<div class="container panel_part">
+			
 			<div class="top panel_part">
 				<?php
 					if( isset($_SESSION['logged_id']) )
@@ -125,7 +141,7 @@ if( !isset($_SESSION['logged_id']) )
 				}
 				?>
 			</div>
-			<div class="content panel_part">
+			<div class= "content panel_part">
 				<?php
 				if( isset( $_GET['type'] ) && !empty( $_GET['type'] ) )
 				{			
@@ -134,7 +150,11 @@ if( !isset($_SESSION['logged_id']) )
 				}
 				?>
 			</div>
+			
 		
+	</div>
+	<div class = "footer panel_part" >
+		FOOTER
 	</div>
 </body>
 </html>

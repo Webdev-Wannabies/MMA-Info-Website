@@ -10,6 +10,7 @@ $userQuery->execute();
 
 
 unset($_SESSION['logged_id']);
+unset($_SESSION['login']);
 
 header('Location: ../panel.php');
 
