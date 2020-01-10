@@ -10,6 +10,8 @@ if(isset($_SESSION['logged_id']))
 								  LEFT JOIN countries ON countries.id = locations.country_id');
 	$events = $eventsQuery->fetchAll();
 	
+	$userQuery->bindValue(':end_time', $_GET['id'], PDO::PARAM_STR);
+	
 	$locQuery = $db->query('SELECT * FROM locations LEFT JOIN countries ON countries.id = locations.country_id');
 	$locations = $locQuery->fetchAll();
 	
