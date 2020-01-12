@@ -11,15 +11,15 @@
 		
 		$id = filter_input(INPUT_GET, 'id');
 		
-		$first_name = filter_input(INPUT_POST, 'first_name');
-		$last_name = filter_input(INPUT_POST, 'last_name');
-		$nickname = filter_input(INPUT_POST, 'nickname');
-		$birthdate = filter_input(INPUT_POST, 'birthdate');
-		$city_name = filter_input(INPUT_POST, 'city_name');
-		$height = filter_input(INPUT_POST, 'height');
-		$weight = filter_input(INPUT_POST, 'weight');
-		$country_id = filter_input(INPUT_POST, 'country_id');
-		$association_id = filter_input(INPUT_POST, 'association_id');
+		$first_name = filter_input(INPUT_GET, 'first_name');
+		$last_name = filter_input(INPUT_GET, 'last_name');
+		$nickname = filter_input(INPUT_GET, 'nickname');
+		$birthdate = filter_input(INPUT_GET, 'birthdate');
+		$city_name = filter_input(INPUT_GET, 'city_name');
+		$height = filter_input(INPUT_GET, 'height');
+		$weight = filter_input(INPUT_GET, 'weight');
+		$country_id = filter_input(INPUT_GET, 'country_id');
+		$association_id = filter_input(INPUT_GET, 'association_id');
 
 		
 		$userQuery = $db->prepare("UPDATE fighters SET first_name = :first_name, last_name = :last_name, nickname = :nickname, birthdate = :birthdate, height = :height, weight = :weight, country_id = :country_id, association_id = :association_id WHERE id = :id" );

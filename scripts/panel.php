@@ -2,6 +2,7 @@
 
 session_start();
 require_once 'database.php';
+$_SESSION['logged_id']=2;
 
 if( !isset($_SESSION['logged_id']) )
 {

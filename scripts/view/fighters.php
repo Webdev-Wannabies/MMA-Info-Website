@@ -2,6 +2,7 @@
 
 
 require_once 'database.php';
+$good = true;
 
 if(isset($_SESSION['logged_id']))
 {
@@ -20,6 +21,92 @@ if(isset($_SESSION['logged_id']))
 	
 	$assQuery = $db->query('SELECT * FROM associations');
 	$associations = $assQuery->fetchAll();
+	if(isset($_POST['first_name']))
+	{
+		require_once 'validation.php';
+		
+		//$efirstName = false;
+		$good = true;
+		if(empty($_POST['first_name']))
+		{
+			$good = false;
+			$efirstName = true;
+		}
+		else
+		{
+		    if(!checkString($_POST['first_name']))
+			{
+				$good = false;
+				$vfirstName = true;
+			}
+		}
+		
+		if(empty($_POST['last_name']))
+		{
+			$good = false;
+			$elastName = true;
+		}
+		else
+		{
+			if(!checkString($_POST['last_name']))
+			{
+				$good = false;
+				$vlastName = true;
+			}
+		}
+		
+		if(empty($_POST['nickname']))
+		{
+			$good = false;
+			$enickName = true;
+		}
+		else
+		{
+			if(!checkString($_POST['nickname']))
+			{
+				$good = false;
+				$vnickName = true;
+			}
+		}
+		
+		if(empty($_POST['height']))
+		{
+			$good = false;
+			$eheight = true;
+		}
+		else
+		{
+			if(!checkDecimal($_POST['height']))
+			{
+				$good = false;
+				$vheight = true;
+			}
+		}
+		
+		if(empty($_POST['weight']))
+		{
+			$good = false;
+			$eweight = true;
+		}
+		else
+		{
+			if(!checkDecimal($_POST['weight']))
+			{
+				$good = false;
+				$vweight = true;
+			}
+		}
+			
+		if($good)
+		{
+			if($_GET['id'])
+			    header("Location: edit/edit_fighter.php?id={$_GET['id']}&first_name={$_POST['first_name']}&last_name={$_POST['last_name']}&nickname={$_POST['nickname']}&birthdate={$_POST['birthdate']}&height={$_POST['height']}&weight={$_POST['weight']}&country_id={$_POST['country_id']}&association_id={$_POST['association_id']}");
+		    else
+				header("Location: add/add_fighter.php?first_name={$_POST['first_name']}&last_name={$_POST['last_name']}&nickname={$_POST['nickname']}&birthdate={$_POST['birthdate']}&height={$_POST['height']}&weight={$_POST['weight']}&country_id={$_POST['country_id']}&association_id={$_POST['association_id']}"); 
+		    exit();
+		}
+			
+	}
 } 
 else
 {
@@ -83,6 +170,22 @@ else
 					}
 				
 				}
+				else if($good == false)
+				{
+					$buttonText = "zly";
+					if(isset($_GET['id']))
+						$id = $_GET['id'];
+					else
+						$id = "";
+					$firstname = $_POST['first_name'];
+					$lastname = $_POST['last_name'];
+					$nickname = $_POST['nickname'];
+					$birthdate = $_POST['birthdate'];
+					$weight = $_POST['weight'];
+					$height = $_POST['height'];
+					$country = $_POST['country_id'];
+					$association = $_POST['association_id'];
+				}
 				else
 				{
  					$action = "add/add_fighter.php";
@@ -100,7 +203,8 @@ else
 				}
 			?>
 				
-			 <form method="post" action="<?php echo $action ?>">
+			 <!--<form method="post" action="<?php //echo $action ?>">-->
+			 <form method="post">
 					<input type="text" name="first_name" value="<?php echo $firstname ?>" >
 					<input type="text" name="last_name" value="<?php echo $lastname ?>" >
 					<input type="text" name="nickname" value="<?php echo $nickname ?>" >
@@ -120,3 +224,60 @@ else
 					</select>
 					<input type="submit"  class="panel_part_small" value="<?php  echo $buttonText  ?>" >
 			</form>
+			<?php
+			echo"";
+			    if(isset($efirstName))
+				{
+					echo "empty first name<br>";
+					$efirstName = false;
+				}
+				if(isset($vfirstName))
+				{
+					echo "first name should be string<br>";
+				    $vfirstName = false;
+				}
+				if(isset($elastName))
+				{
+					echo "empty last name<br>";
+					$elastName =  false;
+				}
+				if(isset($vlastName))
+				{
+					echo "last name should be string<br>";
+					$vlastName = false;
+				}
+				if(isset($enickName))
+				{
+					echo "empty nickname<br>";
+				    $enickName = false;
+				}
+				if(isset($vnickName))
+				{
+					echo "nickname should be string <br>";
+					$vnickName = false;
+				}
+				if(isset($eheight))
+				{
+					$eheight = false;
+					echo "empty height<br>";
+				}
+				if(isset($vheight))
+				{
+					$vheight = false;
+					echo "height should be decimal value with dot<br>";
+				}
+				if(isset($eweight))
+				{
+					$eweight = false;
+					echo "empty weight<br>";
+				}
+				if(isset($vweight))
+				{
+					$vweight = false;
+					echo "weight should be decimal value with dot<br>";
+				}
+				
+					
+			
+			?>
+			
