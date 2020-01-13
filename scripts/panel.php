@@ -89,8 +89,8 @@ if( !isset($_SESSION['logged_id']) )
 	<title> admin-panel </title>
 </head> 
 <body>
-	<div class= "header panel_part">
-		<label class = "panel_part_small" type = "left">  
+	<div class="header panel_part">
+		<label class="panel_part_small" type="right">  
 			<?php  
 				if( isset( $_SESSION['login'] ))
 				{
@@ -103,6 +103,7 @@ if( !isset($_SESSION['logged_id']) )
 				
 			?>  
 		</label>
+		<a href="panel/logout.php" class = "logout_button panel_part_small" type ="right"> Logout </a>
 	</div>
 	<div class="container panel_part">
 			

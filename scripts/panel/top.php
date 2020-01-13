@@ -8,6 +8,6 @@
 <a href="panel.php?type=weightclasses" class = "button panel_part_small" type ="left"> Weightclasses </a>
 <a href="panel.php?type=result_types" class = "button panel_part_small" type ="left"> Result Types </a>
 <a href="panel.php?type=news" class = "button panel_part_small" type ="left"> News </a>
-<a href="panel/logout.php" class = "button panel_part_small" type ="right"> Logout </a>
+
 
 	

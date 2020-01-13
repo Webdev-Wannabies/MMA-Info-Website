@@ -1,6 +1,25 @@
 * 
 {
 	box-sizing: border-box;
+	color: white;
+}
+
+a
+{
+	color: black;
+	text-decoration: none;
+}
+
+.picture
+{
+	height: auto;
+	width: auto;
+}
+
+.content_short_part
+{
+	text-align: left;
+	
 }
 
 html, body
@@ -124,4 +143,58 @@ html, body
 .row-bottom
 {
 	height: 10%;
+}
+
+form.search input[type=text]
+{
+	background-color: white;
+	
+	width: 80%;
+	padding: 1%;
+	
+	border: 1px solid grey;
+	
+	float: left;
+}
+
+form.search button
+{
+	background-color: red;
+	
+	width: 20%;
+	padding: 1%;
+	
+	border: 1px solid grey;
+	border-left: none; 
+	
+	float: left;
+	cursor: pointer;
+}
+
+form.search button:hover
+{
+	background: yellow;
+}
+
+.search_result
+{
+	background: yellow;
+	
+	width: 80%;
+	height:10%;
+	
+	margin: auto;
+	margin-top: 2%;
+}
+
+[type=left]
+{
+	float:left;
+	display:inline;
+}
+
+[type=right]
+{
+	float:right;
+	display:inline;
 }

@@ -17,7 +17,6 @@ a
 	text-decoration: none;
 }
 
-
 input[type=submit]:hover, 
 input[type=submit]:focus,
 a:hover, a:active
@@ -127,6 +126,11 @@ input[type=submit]:focus,
 	background-color: gray;
 	
 	color: black;
+}
+
+.logout_button:hover
+{
+	background: yellow;
 }
 
 .container
