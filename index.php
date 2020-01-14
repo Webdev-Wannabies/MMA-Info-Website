@@ -46,8 +46,6 @@ if( isset( $_GET['search'] ) )
 			}
 			
 			$construct = "SELECT * FROM $tableName WHERE" . $construct . ";";
-		
-			echo '<p>' . $construct . '</p>';
 					
 			$searchQuery = $db->prepare( $construct );
 			$searchQuery->execute();
@@ -106,16 +104,17 @@ if( isset( $_GET['search'] ) )
 					}
 				}	
 			}
+			else if( isset($_GET['type'] ) && isset($_GET['id'] ) )
+			{
+				$content_page = "scripts/client/view/" . $_GET['type'] . "_l.php";
+				require_once( $content_page );
+			}
 			else
 			{
-				if( isset($_GET['type'] ) && isset($_GET['id'] ) )
-				{
-					$content_page = "scripts/client/view/" . $_GET['type'] . "_l.php";
-					require_once( $content_page );
-				}
+				$content_page = "scripts/client/view/front_page_l.php";
+				require_once( $content_page );
 			}
 			
-			// ELSE DISPLAY NEWS - TO DO
 			?>
 		</div>
 		<div class="col-2 col-l-2 col-xl-2">
@@ -124,6 +123,12 @@ if( isset( $_GET['search'] ) )
 			{
 				$content_page = "scripts/client/view/" . $_GET['type'] . "_s.php";
 				require_once( $content_page );
+			}
+			else
+			{
+				$content_page = "scripts/client/view/front_page_s.php";
+				require_once( $content_page );
+				
 			}
 			?>
 		</div>

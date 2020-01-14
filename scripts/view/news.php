@@ -8,7 +8,6 @@ if(isset($_SESSION['logged_id']))
 											LEFT JOIN admins ON news.admin_id = admins.id
 	');
 	$news = $newsQuery->fetchAll();
-	
 } 
 else
 {

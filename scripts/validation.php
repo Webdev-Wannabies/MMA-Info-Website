@@ -1,32 +1,22 @@
 <?php 
-function checkEmpty($value){
-	if(empty($value))
-		return true;
-	else    
-		return false;
+function checkEmpty($value)
+{
+	return empty($value);
 }	
 
-function checkDecimal($value){
-	if (!preg_match('/^[0-9]{1,3}\.[0-9]{1,2}$/', $value)) 
-    {
-		return false;
-    }
-    return true;
+function checkDecimal($value)
+{
+	return preg_match('/^[0-9]{1,3}\.[0-9]{1,2}$/', $value);
 }	
 
-function checkInt($value){
-	if (!preg_match('/^[0-9]{1,3}$/', $value)) 
-    {
-		return false;
-    }
-    return true;	
+function checkInt($value)
+{
+	return preg_match('/^[0-9]{1,3}$/', $value);	
 }	
 
-function checkString($value){
-	if (!preg_match('/^[a-z]+$/', $value)) 
-    {
-		return false;
-    }
-    return true;
+function checkString($value)
+{
+	return preg_match('/^[a-zA-Z]+$/', $value);
+
 }
 ?>

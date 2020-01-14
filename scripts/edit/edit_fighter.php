@@ -14,6 +14,7 @@
 		$first_name = filter_input(INPUT_GET, 'first_name');
 		$last_name = filter_input(INPUT_GET, 'last_name');
 		$nickname = filter_input(INPUT_GET, 'nickname');
+		$gender = filter_input(INPUT_GET, 'gender');
 		$birthdate = filter_input(INPUT_GET, 'birthdate');
 		$city_name = filter_input(INPUT_GET, 'city_name');
 		$height = filter_input(INPUT_GET, 'height');
@@ -22,11 +23,12 @@
 		$association_id = filter_input(INPUT_GET, 'association_id');
 
 		
-		$userQuery = $db->prepare("UPDATE fighters SET first_name = :first_name, last_name = :last_name, nickname = :nickname, birthdate = :birthdate, height = :height, weight = :weight, country_id = :country_id, association_id = :association_id WHERE id = :id" );
+		$userQuery = $db->prepare("UPDATE fighters SET first_name = :first_name, last_name = :last_name, nickname = :nickname, gender = :gender, birthdate = :birthdate, height = :height, weight = :weight, country_id = :country_id, association_id = :association_id WHERE id = :id" );
 		$userQuery->bindValue(':id', $id, PDO::PARAM_STR);
 		$userQuery->bindValue(':first_name', $first_name, PDO::PARAM_STR);
 		$userQuery->bindValue(':last_name', $last_name, PDO::PARAM_STR);
 		$userQuery->bindValue(':nickname', $nickname, PDO::PARAM_STR);
+		$userQuery->bindValue(':gender', $gender, PDO::PARAM_STR);
 		$userQuery->bindValue(':birthdate', $birthdate, PDO::PARAM_STR);
 		$userQuery->bindValue(':height', $height, PDO::PARAM_STR);
 		$userQuery->bindValue(':weight', $weight, PDO::PARAM_STR);

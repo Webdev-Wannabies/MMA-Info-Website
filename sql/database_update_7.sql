@@ -1,0 +1,1 @@
+ALTER TABLE fighters ADD COLUMN gender CHAR NOT NULL;

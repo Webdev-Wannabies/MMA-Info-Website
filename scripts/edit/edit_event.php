@@ -28,7 +28,7 @@
 		
 		
 		
-		header('Location: panel.php?type=events');
+		header('Location: ../panel.php?type=events');
 		exit();
 	}
 	

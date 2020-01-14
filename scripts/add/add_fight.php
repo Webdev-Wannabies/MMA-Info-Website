@@ -19,12 +19,15 @@
 		$end_time = filter_input(INPUT_POST, 'end_time');
 		
 
+		echo $weightclass_id;
 		
-		$userQuery = $db->prepare("INSERT INTO fights(id, fighter_id, opponent_id, weightclass_id, event_id, winner_id, end_round, end_time) VALUES (null, :fighter_id,  :opponent_id, :weightclass_id, :event_id, :winner_id, :end_round, :end_time)");
+		$userQuery = $db->prepare("INSERT INTO fights(id, fighter_id, opponent_id, weightclass_id, event_id, result_type_id, winner_id, end_round, end_time) 
+											VALUES (null, :fighter_id,  :opponent_id, :weightclass_id, :event_id, :result_type_id, :winner_id, :end_round, :end_time)");
 		$userQuery->bindValue(':fighter_id', $fighter_id, PDO::PARAM_STR);
 		$userQuery->bindValue(':opponent_id', $opponent_id, PDO::PARAM_STR);
 		$userQuery->bindValue(':weightclass_id', $weightclass_id, PDO::PARAM_STR);
 		$userQuery->bindValue(':event_id', $event_id, PDO::PARAM_STR); 
+		$userQuery->bindValue(':result_type_id', $result_type_id, PDO::PARAM_STR); 
 		$userQuery->bindValue(':winner_id', $winner_id, PDO::PARAM_STR);
 		$userQuery->bindValue(':end_round', $end_round, PDO::PARAM_STR);
 		$userQuery->bindValue(':end_time', $end_time, PDO::PARAM_STR);

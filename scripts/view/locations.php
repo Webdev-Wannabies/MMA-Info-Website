@@ -4,7 +4,7 @@ require_once 'database.php';
 
 if(isset($_SESSION['logged_id']))
 {
-	$locationsQuery = $db->query('SELECT locations.id, locations.city, countries.name FROM locations LEFT JOIN countries ON locations.id = countries.id');
+	$locationsQuery = $db->query('SELECT locations.id, locations.city, countries.name country_name FROM locations LEFT JOIN countries ON locations.country_id = countries.id');
 	$locations = $locationsQuery->fetchAll();
 	
 	$countriesQuery = $db->query('SELECT * FROM countries');
@@ -27,7 +27,7 @@ else
 					<?php foreach ($locations as $location) : ?>
 						<tr>
 								<td><?php echo $location['id']; ?></td>
-								<td><?php echo $location['name']; ?></td>
+								<td><?php echo $location['country_name']; ?></td>
 								<td><?php echo $location['city']; ?></td>
 								<td>
 									<a href="panel.php?type=locations&id=<?php echo $location['id'];  ?>">Edit</a>

@@ -11,10 +11,12 @@
 		$id = filter_input(INPUT_GET, 'id');
 		
 		$description = filter_input(INPUT_POST, 'description');
+		$additional_info = filter_input(INPUT_POST, 'additional_info');
 		
 		$userQuery = $db->prepare("UPDATE result_types SET description = :description WHERE id = :id");
 		$userQuery->bindValue(':id', $id, PDO::PARAM_STR);
 		$userQuery->bindValue(':description', $description, PDO::PARAM_STR);
+		$userQuery->bindValue(':additional_info', $additional_info, PDO::PARAM_STR);
 		$userQuery->execute();
 		
 		header('Location: ../panel.php?type=result_types');

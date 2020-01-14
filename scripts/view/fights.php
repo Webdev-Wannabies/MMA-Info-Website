@@ -129,7 +129,7 @@ else
 						<?php endforeach ?>
 					</select>
 					
-					<select name="result_type" > result_type </option>
+					<select name="result_type_id" > result_type </option>
 						<?php foreach ($result_types as $result_type): ?>
 								<option value= "<?php echo $result_type['id'] ?>" > <?php echo $result_type['description'] ?> </option>
 						<?php endforeach ?>

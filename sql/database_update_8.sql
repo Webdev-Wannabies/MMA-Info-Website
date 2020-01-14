@@ -1,0 +1,1 @@
+ALTER TABLE result_types ADD COLUMN additional_info VARCHAR(255);

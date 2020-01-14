@@ -19,15 +19,15 @@ $fightersQuery->execute();
 $fighter = $fightersQuery->fetch();
 ?>
 
-<div class='content_short_part' type='right'><img src = "<?php echo 'img/countries/flags/' . strtolower( $fighter['countryname'] ) . '.png'; ?> "/></div>
-<div class='content_short_part' type='right'><?php echo $fighter['countryname']; ?></div>
-<div class='content_short_part'><img src = "<?php echo 'img/fighters/profile/' . strtolower( $fighter['first_name'] . '_'. $fighter['last_name'] ) . '.png' ?>" class = "picture"/></div>
-<div class='content_short_part'><?php echo $fighter['first_name'] . ' ' . $fighter['last_name'] ?></div>
-<div class='content_short_part'><?php echo ' "' . $fighter['nickname'] . '" ' ?></div>
-<div class='content_short_part'><?php echo 'Born: ' . $fighter['birthdate'] ?></div>
-<div class='content_short_part'><?php echo 'Height: ' . $fighter['height'] . ' cm'?></div>
-<div class='content_short_part'><?php echo 'Weight: ' . $fighter['weight'] . ' kg'?></div>
-<div class='content_short_part'><?php echo 'Association: ' . $fighter['asocname']; ?></div>
-<div class='content_short_part'>
-	<a href="panel.php?type=fighters&id=<?php echo $fighter['id'];  ?>">Edit</a>
+<div class='content_part_short'><img src = "<?php echo 'img/fighters/profile/' . strtolower( $fighter['first_name'] . '_'. $fighter['last_name'] ) . '.png' ?>" class = "picture"/></div>
+<div class='content_part_short'><?php echo $fighter['first_name'] . ' ' . $fighter['last_name'] ?></div>
+<div class='content_part_short'><?php echo ' "' . $fighter['nickname'] . '" ' ?></div>
+<div class='content_part_short'><?php echo 'Born: ' . $fighter['birthdate'] ?></div>
+<div class='content_part_short'><?php echo 'Height: ' . $fighter['height'] . ' cm'?></div>
+<div class='content_part_short'><?php echo 'Weight: ' . $fighter['weight'] . ' kg'?></div>
+<div class='content_part_short'><?php echo 'Association: ' . $fighter['asocname']; ?></div>
+<div class='content_part_short'>
+	<img src = "<?php echo 'img/countries/flags/' . strtolower( $fighter['countryname'] ) . '.png'; ?>"/>
+				<?php echo $fighter['countryname']; ?>
 </div>
+

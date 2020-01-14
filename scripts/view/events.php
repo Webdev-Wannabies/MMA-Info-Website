@@ -1,18 +1,17 @@
 <?php
 
 require_once 'database.php';
-$_SESSION['logged_id'] = 2;
+
 if(isset($_SESSION['logged_id']))
 {
-	$eventsQuery = $db->query('SELECT events.id, events.name, events.date, CONCAT(locations.city, countries.name) loc, organizations.name org
+	$eventsQuery = $db->query('SELECT events.id, events.name event_name, events.date, locations.id loc_id, locations.city, countries.name, organizations.name org
 								  FROM events LEFT JOIN organizations ON events.organization_id = organizations.id
                                   LEFT JOIN locations ON events.location_id = locations.id
 								  LEFT JOIN countries ON countries.id = locations.country_id');
 	$events = $eventsQuery->fetchAll();
 	
-	$userQuery->bindValue(':end_time', $_GET['id'], PDO::PARAM_STR);
 	
-	$locQuery = $db->query('SELECT * FROM locations LEFT JOIN countries ON countries.id = locations.country_id');
+	$locQuery = $db->query('SELECT locations.id, locations.city, countries.name FROM locations LEFT JOIN countries ON countries.id = locations.country_id');
 	$locations = $locQuery->fetchAll();
 	
 	$orgQuery = $db->query('SELECT * FROM organizations');
@@ -33,9 +32,9 @@ else
 					<?php foreach ($events as $event) : ?>
 						<tr>
 								<td><?php echo $event['id']; ?></td>
-								<td><?php echo $event['name']; ?></td>
+								<td><?php echo $event['event_name']; ?></td>
 								<td><?php echo $event['date']; ?></td>
-								<td><?php echo $event['loc']; ?></td>
+								<td><?php echo $event['city'] . ', ' . $event['name']; ?></td>
 								<td><?php echo $event['org']; ?></td>
 								<td>
 									<a href="panel.php?type=events&id=<?php echo $event['id'];  ?>">Edit</a>
@@ -61,9 +60,9 @@ else
 						if($event['id'] == $_GET['id'] )
 						{
 							$id = $event['id'];
-							$name = $event['name'];
+							$name = $event['event_name'];
 							$date = $event['date'];
-							$location_id = $event['loc'];
+							$location_id = $event['loc_id'];
 							$orgganization_id = $event['org'];
 			
 						}

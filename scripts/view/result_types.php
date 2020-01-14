@@ -18,13 +18,14 @@ else
 
 			<table>
 					<thead>
-						<tr><th>ID</th><th>Description</th><th colspan = 2>Operations</th></tr>
+						<tr><th>ID</th><th>Description</th><th>Additional</th><th colspan = 2>Operations</th></tr>
 					</thead>
 					<tbody>
 					<?php foreach ($result_types as $result_type) : ?>
 						<tr>
 								<td><?php echo $result_type['id']; ?></td>
 								<td><?php echo $result_type['description']; ?></td>
+								<td><?php echo $result_type['additional_info']; ?></td>
 								<td>
 									<a href="panel.php?type=result_types&id=<?php echo $result_type['id'];  ?>">Edit</a>
 								</td>
@@ -58,10 +59,12 @@ else
 					$action = "add/add_result_type.php";
 					$buttonText = "add"; 
 					$result_typeName = "";
+					$result_additionalInfo = "";
 				}
 			?>
 				
 			 <form method="post" action="<?php echo $action ?>">
 					<input type="text" name="description" value="<?php echo $result_typeName  ?>" >
+					<input type="text" name="additional_info" value="<?php echo $result_additionalInfo  ?>" >
 					<input type="submit" class="panel_part_small" value="<?php  echo $buttonText  ?>" >
 			</form>
