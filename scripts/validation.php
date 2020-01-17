@@ -19,4 +19,16 @@ function checkString($value)
 	return preg_match('/^[a-zA-Z]+$/', $value);
 
 }
+function checkTime($value)
+{
+	return preg_match('/^[0-9]{1,2}\:[0-9]{1,2}$/', $value);
+}	
+
+function checkFighters($f1, $f2, $winner)
+{
+	if($winner == $f1 || $winner == $f2)
+		return true;
+	else 
+		return false;
+}
 ?>

@@ -8,6 +8,7 @@
 	}
 	else
 	{
+		$_SESSION['weightclassBadValues']=false;
 		
 		$id = filter_input(INPUT_GET, 'id');
 		
@@ -17,7 +18,10 @@
 		$organization_id = filter_input(INPUT_POST, 'organization_id');
 		
 
+		require_once '../validation/validateWeightclass.php';
 		
+		if($_SESSION['weightclassBadValues']==false)
+	    {
 		$userQuery = $db->prepare("UPDATE weightclasses SET lower_limit = :lower_limit, upper_limit = :upper_limit, name = :name, organization_id = :organization_id WHERE id = :id" );
 		$userQuery->bindValue(':id', $id, PDO::PARAM_STR);
 		$userQuery->bindValue(':lower_limit', $lower_limit, PDO::PARAM_STR);
@@ -30,6 +34,12 @@
 		
 		header('Location: ../panel.php?type=weightclasses');
 		exit();
+		}
+		else
+		{
+			header('Location: ../panel.php?type=weightclasses&id=' . $id . '&lower_limit=' . $lower_limit . '&upper_limit=' . $upper_limit . '&name=' . $name . '&organization_id=' . $organization_id);
+		    exit();
+		}
 	}
 	
 	

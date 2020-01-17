@@ -8,6 +8,7 @@
 	}
 	else
 	{
+		$_SESSION['weightclassBadValues']=false;
 		
 		$lower_limit = filter_input(INPUT_POST, 'lower_limit');
 		$upper_limit = filter_input(INPUT_POST, 'upper_limit');
@@ -15,19 +16,26 @@
 		$organization_id = filter_input(INPUT_POST, 'organization_id');
 		
 
+		require_once '../validation/validateWeightclass.php';
 		
-		$userQuery = $db->prepare("INSERT INTO weightclasses (lower_limit, upper_limit, name, organization_id ) 
-		                           VALUES (:lower_limit,:upper_limit,:name,:organization_id)" );
-		$userQuery->bindValue(':lower_limit', $lower_limit, PDO::PARAM_STR);
-		$userQuery->bindValue(':upper_limit', $upper_limit, PDO::PARAM_STR);
-		$userQuery->bindValue(':name', $name, PDO::PARAM_STR);
-		$userQuery->bindValue(':organization_id', $organization_id, PDO::PARAM_STR);
-		$userQuery->execute();
+		if($_SESSION['weightclassBadValues']==false)
+	    {
+			$userQuery = $db->prepare("INSERT INTO weightclasses (lower_limit, upper_limit, name, organization_id ) 
+									VALUES (:lower_limit,:upper_limit,:name,:organization_id)" );
+			$userQuery->bindValue(':lower_limit', $lower_limit, PDO::PARAM_STR);
+			$userQuery->bindValue(':upper_limit', $upper_limit, PDO::PARAM_STR);
+			$userQuery->bindValue(':name', $name, PDO::PARAM_STR);
+			$userQuery->bindValue(':organization_id', $organization_id, PDO::PARAM_STR);
+			$userQuery->execute();
 		
-		
-		
-		header('Location: ../panel.php?type=weightclasses');
-		exit();
+			header('Location: ../panel.php?type=weightclasses');
+			exit();
+		}
+		else
+		{
+			header('Location: ../panel.php?type=weightclasses&lower_limit=' . $lower_limit . '&upper_limit=' . $upper_limit . '&name=' . $name . '&organization_id=' . $organization_id);
+		    exit();
+		}
 	}
 	
 	

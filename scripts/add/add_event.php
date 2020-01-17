@@ -8,28 +8,36 @@
 	}
 	else
 	{
+		$_SESSION['eventBadValues'] = false;
 		
 		$name = filter_input(INPUT_POST, 'name');
 		$date = filter_input(INPUT_POST, 'date');
 		$location_id = filter_input(INPUT_POST, 'location_id');
 		$organization_id = filter_input(INPUT_POST, 'organization_id');
 		
-		echo $name . $date . ' ' . $location_id . ' ' . $organization_id;
+		require_once '../validation/validateEvent.php';
 		
-		$userQuery = $db->prepare("INSERT INTO events (id, name, date, location_id, organization_id ) 
+		if($_SESSION['eventBadValues']==false)
+	    {
+		
+			$userQuery = $db->prepare("INSERT INTO events (id, name, date, location_id, organization_id ) 
 		                           VALUES (null, :name, :date, :location_id, :organization_id)" );
 								   
-		$userQuery->bindValue(':name', $name, PDO::PARAM_STR);
-		$userQuery->bindValue(':date', $date, PDO::PARAM_STR);
-		$userQuery->bindValue(':location_id', $location_id, PDO::PARAM_STR);
-		$userQuery->bindValue(':organization_id', $organization_id, PDO::PARAM_STR);
+			$userQuery->bindValue(':name', $name, PDO::PARAM_STR);
+			$userQuery->bindValue(':date', $date, PDO::PARAM_STR);
+			$userQuery->bindValue(':location_id', $location_id, PDO::PARAM_STR);
+			$userQuery->bindValue(':organization_id', $organization_id, PDO::PARAM_STR);
 		
-		$userQuery->execute();
+			$userQuery->execute();
 		
-		
-		
-		header('Location: ../panel.php?type=events');
-		exit();
+			header('Location: ../panel.php?type=events');
+			exit();
+		}
+		else
+		{
+			header('Location: ../panel.php?type=events&name=' . $name . '&date=' . $date . '&location_id=' . $location_id . '&organization_id=' . $organization_id);
+			exit();
+		}
 	}
 	
 	
