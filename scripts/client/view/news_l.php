@@ -13,14 +13,14 @@ $news = $newsQuery->fetch();
 
 ?>
 
-<div class="content_part_container">
-	<div class="content_part_short">
+<div class='content_part_container'>
+	<div class='content_part_short'>
 		<h2>
 			<?php echo $news['title']; ?>
 		</h2>
 	</div>
 
-	<div class="content_part_short">
+	<div class='content_part_short'>
 		<?php echo $news['body']; ?>
 	</div>
 </div>

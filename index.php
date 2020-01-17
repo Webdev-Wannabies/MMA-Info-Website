@@ -90,6 +90,7 @@ if( isset( $_GET['search'] ) )
 		</div> 
 		
 		<div class="col-8 col-s-8 content-l">
+			
 			<?php
 			if( isset( $searchResults ) )
 			{
