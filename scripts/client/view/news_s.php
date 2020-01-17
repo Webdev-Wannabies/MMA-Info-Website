@@ -15,12 +15,11 @@ $newsQuery->execute();
 $news = $newsQuery->fetch();
 
 ?>
-
-<div class="content_part_short">
-	<?php echo $news['admin_name']  ?>
+<div class="content_part_container">
+	<div class="content_part_short">
+		<?php echo $news['admin_name']  ?>
+	</div>
+	<div class="content_part_short">
+		<?php echo $news['creation_date']; ?>
+	</div>			
 </div>
-<div class="content_part_short">
-	<?php echo $news['creation_date']; ?>
-</div>
-	
-			

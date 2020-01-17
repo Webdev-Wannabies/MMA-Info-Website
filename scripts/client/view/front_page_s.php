@@ -16,7 +16,7 @@ $events_data = $eventQuery->fetchAll();
 
 <?php foreach ($events_data as $event) : ?>
 
-<div class="content_part_short">
+<div class="content_part_container">
 	<div>
 		<?php echo $event['name']  ?>
 	</div>

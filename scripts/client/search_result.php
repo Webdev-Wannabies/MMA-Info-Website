@@ -1,5 +1,5 @@
 
-	<div class='search_result'>
+	<div class='content_part_container'>
 	<?php
 	if( isset($_GET['search']) )
 	{

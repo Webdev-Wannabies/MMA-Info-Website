@@ -93,7 +93,7 @@ tr
 
 td
 {
-	text-align: left;
+	text-align: center;
 	background-color: white;
 }
 
@@ -102,6 +102,12 @@ label
 	background-color: gray;
 	color: black;
 	
+}
+
+img
+{
+	height: auto;
+	width: 30%;
 }
 
 input[type=submit],

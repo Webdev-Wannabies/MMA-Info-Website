@@ -137,14 +137,7 @@ else
 										
 										if( !file_exists($imgpath) )
 										{
-											if( $fighter['gender'] == 'M' )
-											{
-												$imgpath = '../img/fighters/profile/blank_male.png';
-											}
-											else
-											{
-												$imgpath = '../img/fighters/profile/blank_female.png';
-											}
+											$imgpath = '../img/fighters/profile/silhouette.png';
 										}
 									?>
 									<img src = "<?php echo $imgpath ?>" class = "picture"/>

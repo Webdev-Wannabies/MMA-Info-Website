@@ -25,7 +25,7 @@ else
 						<tr>
 								<td><?php echo $country['id']; ?></td>
 								<td><?php echo $country['name']; ?></td>
-								<td> <img src = "<?php echo '../../img/countries/flags/' .strtolower( $country['name'] ). '.png' ?> " class = "flag"/></td>
+								<td> <img src = "<?php echo '../img/countries/flags/' . $country['name'] . '.png' ?> "/></td>
 								<td>
 									<a href="panel.php?type=countries&id=<?php echo $country['id'];  ?>">Edit</a>
 								</td>

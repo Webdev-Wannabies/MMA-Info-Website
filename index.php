@@ -69,16 +69,13 @@ if( isset( $_GET['search'] ) )
 	<title> MMA-Info-Website </title>
 </head> 
 <body>
-	<div class="row-top">
-		<div class="col-3 col-l-3 col-xl-3">
-			ICON
-		</div> 
-		<div class="col-9 col-l-9 col-xl-9">
-			BANNER
+	<div class="row row-top">
+		<div class="col-12 col-s-12">
+			<img src="img/banner.png" class="banner" />
 		</div>
 	</div>
-	<div class="row-middle">
-		<div class="col-2 col-l-2 col-xl-2">
+	<div class="row row-middle">
+		<div class="col-2 col-s-2">
 		
 			<form method="get" class="search" action="index.php">
 				<input type="text" placeholder="search..." name="search"/>
@@ -92,7 +89,7 @@ if( isset( $_GET['search'] ) )
 			MENU
 		</div> 
 		
-		<div class="col-8 col-l-8 col-xl-8">
+		<div class="col-8 col-s-8 content-l">
 			<?php
 			if( isset( $searchResults ) )
 			{
@@ -117,7 +114,7 @@ if( isset( $_GET['search'] ) )
 			
 			?>
 		</div>
-		<div class="col-2 col-l-2 col-xl-2">
+		<div class="col-2 col-s-2 content-s">
 			<?php
 			if( isset($_GET['type'] ) && isset($_GET['id'] ) )
 			{
@@ -128,14 +125,13 @@ if( isset( $_GET['search'] ) )
 			{
 				$content_page = "scripts/client/view/front_page_s.php";
 				require_once( $content_page );
-				
 			}
 			?>
 		</div>
 	</div>
-	<div class="row-bottom">
-		<div class="col-12 col-l-12 col-xl-12">
-			FOOTER
+	<div class="row row-bottom">
+		<div class="col-12 col-s-12">
+			Created by Gaweł Bartczak, Igor Dołomisiewicz.
 		</div> 
 
 	</div>	

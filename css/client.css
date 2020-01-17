@@ -1,17 +1,25 @@
 * 
 {
 	box-sizing: border-box;
-	
 }
 
 html, body
 {
-	background-color: #DEDEDE;
+	background-color: black;
+	
+	background-image: url('../img/background.png');
+	background-repeat: repeat;
+	background-size: 12.5%;
 	
 	height: 100%;
-	width: 90%;
+	width: 100%;
 	
 	margin: auto;
+}
+
+body
+{
+	overflow-y: scroll;
 }
 
 a
@@ -20,53 +28,33 @@ a
 	text-decoration: none;
 }
 
-.picture
-{
+img[type=flag]
+{	
 	height: auto;
-	width: auto;
+	width: 25%;
 }
 
-.content_part_short
-{
+img[type=fighter_profile]
+{	
+	height: auto;
+	width: 100%;
 	
-	color: #000000;
-	background: #A7A5B5;
-	
-	text-align: left;
-	
-	margin: 0.5%;
-	padding: 0.25%;
-	
-	border: solid red 0.15em;
+	border: 0.15em solid black;
 }
 
 [class*="col-"] 
 {
+	background-color: #202020;
+	
 	float: left;
-  
-	padding: 10px;
-	border: 1px solid red;
-  
-	min-height: 100%;
+	
+	height: 100%;
+	
+	margin: auto;
+	
 }
 
 @media only screen and (max-width: 600px) 
-{
-  .col-xs-1 {width: 8.33%;}
-  .col-xs-2 {width: 16.66%;}
-  .col-xs-3 {width: 25%;}
-  .col-xs-4 {width: 33.33%;}
-  .col-xs-5 {width: 41.66%;}
-  .col-xs-6 {width: 50%;}
-  .col-xs-7 {width: 58.33%;}
-  .col-xs-8 {width: 66.66%;}
-  .col-xs-9 {width: 75%;}
-  .col-xs-10 {width: 83.33%;}
-  .col-xs-11 {width: 91.66%;}
-  .col-xs-12 {width: 100%;}
-}
-
-@media only screen and (min-width: 600px) 
 {
   .col-s-1 {width: 8.33%;}
   .col-s-2 {width: 16.66%;}
@@ -82,7 +70,7 @@ a
   .col-s-12 {width: 100%;}
 }
 
-@media only screen and (min-width: 768px) 
+@media only screen and (min-width: 600px) 
 {
   .col-1 {width: 8.33%;}
   .col-2 {width: 16.66%;}
@@ -98,49 +86,40 @@ a
   .col-12 {width: 100%;}
 }
 
-@media only screen and (min-width: 992px)
-{
-  .col-l-1 {width: 8.33%;}
-  .col-l-2 {width: 16.66%;}
-  .col-l-3 {width: 25%;}
-  .col-l-4 {width: 33.33%;}
-  .col-l-5 {width: 41.66%;}
-  .col-l-6 {width: 50%;}
-  .col-l-7 {width: 58.33%;}
-  .col-l-8 {width: 66.66%;}
-  .col-l-9 {width: 75%;}
-  .col-l-10 {width: 83.33%;}
-  .col-l-11 {width: 91.66%;}
-  .col-l-12 {width: 100%;}
-}
-
-@media only screen and (min-xl-width: 1200px)
-{
-  .col-xl-1 {width: 8.33%;}
-  .col-xl-2 {width: 16.66%;}
-  .col-xl-3 {width: 25%;}
-  .col-xl-4 {width: 33.33%;}
-  .col-xl-5 {width: 41.66%;}
-  .col-xl-6 {width: 50%;}
-  .col-xl-7 {width: 58.33%;}
-  .col-xl-8 {width: 66.66%;}
-  .col-xl-9 {width: 75%;}
-  .col-xl-10 {width: 83.33%;}
-  .col-xl-11 {width: 91.66%;}
-  .col-xl-12 {width: 100%;}
-}
-
 [class*="row-"] 
 {
 	text-align: center;
 	
-	background-color: #000000;
-	color: #FFFFFF;
+	display: table;
+	width: 80%;
+	
+	background-color: black;
+	color: white;
+	
+	margin: auto;
+	
+	border: solid white 2px;
+}
+
+.content-l
+{
+	
+}
+
+.content-s
+{
+	
 }
 
 .row-top
 {
 	height: 12.5%;
+}
+
+.row-top img
+{
+	width: 50%;
+	float: left
 }
 
 .row-middle
@@ -151,11 +130,7 @@ a
 .row-bottom
 {
 	height: 10%;
-}
-
-.read_more_button
-{
-	cursor: pointer;
+	
 }
 
 form.search input[type=text]
@@ -166,7 +141,7 @@ form.search input[type=text]
 	width: 80%;
 	padding: 1%;
 	
-	border: 1px solid grey;
+	border: 0.15em solid black;
 	
 	float: left;
 }
@@ -178,7 +153,7 @@ form.search button
 	width: 20%;
 	padding: 1%;
 	
-	border: 1px solid grey;
+	border: 0.15em solid black;
 	border-left: none; 
 	
 	float: left;
@@ -190,15 +165,29 @@ form.search button:hover
 	background: yellow;
 }
 
-.search_result
+.content_part_container
 {
-	background: yellow;
+	position: relative;
 	
-	width: 80%;
-	height:10%;
+	color: #000000;
+	background: #A7A5B5;
 	
-	margin: auto;
-	margin-top: 2%;
+	text-align: left;
+	
+	margin: 0.5%;
+	padding: 0.25%;
+	
+	border: solid red 0.15em;
+}
+
+.content_part_short
+{
+	margin: 0.5%;
+}
+
+.read_more_button
+{
+	cursor: pointer;
 }
 
 [type=left]

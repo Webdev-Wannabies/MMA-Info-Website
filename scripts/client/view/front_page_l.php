@@ -15,7 +15,7 @@ $news_data = $newsQuery->fetchAll();
 
 <?php foreach ($news_data as $news) : ?>
 
-<div class="content_part_short">
+<div class="content_part_container">
 	<div>
 		<?php echo $news['title']  ?>
 	</div>
