@@ -1,6 +1,10 @@
 <?php
 
 require_once 'database.php';
+if(isset($_SESSION['result_typeBadValues']))
+{
+	$_SESSION['result_typeBadValues'] = false;
+}
 
 if(isset($_SESSION['logged_id']))
 {
@@ -40,7 +44,7 @@ else
 			</table>
 			
 			<?php		
-				if(isset($_GET['id']))
+				if(isset($_GET['id']) && !isset($_GET['description']))
 				{			
 					$action = "edit/edit_result_type.php?id={$_GET['id']}";
 					$buttonText = "apply"; 
@@ -50,9 +54,25 @@ else
 						if($result_type['id'] == $_GET['id'] )
 						{
 							$result_typeName = $result_type['description'];
+							$result_additionalInfo = $result_type['additional_info'];
 						}
 					}
-				
+				}
+				else if(isset($_GET['id']) && isset($_GET['description']))
+				{
+					$action = "edit/edit_result_type.php?id={$_GET['id']}";
+					$buttonText = "apply"; 
+					
+					$result_typeName = $_GET['description'];
+					$result_additionalInfo = $_GET['additional_info'];
+				}
+				else if(!isset($_GET['id']) && isset($_GET['description']))
+				{
+					$action = "add/add_result_type.php";
+					$buttonText = "add";
+					
+					$result_typeName = $_GET['description'];
+					$result_additionalInfo = $_GET['additional_info'];
 				}
 				else
 				{
@@ -64,7 +84,31 @@ else
 			?>
 				
 			 <form method="post" action="<?php echo $action ?>">
-					<input type="text" name="description" value="<?php echo $result_typeName  ?>" >
-					<input type="text" name="additional_info" value="<?php echo $result_additionalInfo  ?>" >
+					<label>Description<input type="text" name="description" value="<?php echo $result_typeName  ?>" ></label>
+					<label>Additional info<input type="text" name="additional_info" value="<?php echo $result_additionalInfo  ?>" ></label>
 					<input type="submit" class="panel_part_small" value="<?php  echo $buttonText  ?>" >
 			</form>
+			<?php
+				if(isset($_SESSION['result_typeEmptyDescription']) && $_SESSION['result_typeEmptyDescription'] == true ) 
+				{	
+					echo "Empty Description";
+					$_SESSION['result_typeEmptyDescription'] = false;
+				}
+				else if(isset($_SESSION['result_typeBadDescription']) && $_SESSION['result_typeBadDescription'] == false) 
+				{	
+					echo "Description schould be string";
+					$_SESSION['result_typeBadDescription'] = false;
+				}
+				if(isset($_SESSION['result_typeEmptyAdditionalInfo']) && $_SESSION['result_typeEmptyAdditionalInfo'] == true ) 
+				{	
+					echo "Empty Additional Info";
+					$_SESSION['result_typeEmptyAdditionalInfo'] = false;
+				}
+				else if(isset($_SESSION['result_typeBadAdditionalInfo']) && $_SESSION['result_typeBadAdditionalInfo'] == false) 
+				{	
+					echo "Additional info schould be string";
+					$_SESSION['result_typeBadAdditionalInfo'] = false;
+				}
+			
+			?>
+			

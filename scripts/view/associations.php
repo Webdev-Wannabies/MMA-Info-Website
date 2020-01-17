@@ -41,7 +41,7 @@ else
 			</table>
 			
 			<?php		
-				if(isset($_GET['id']))
+				if(isset($_GET['id']) && !isset($_GET['name']))
 				{			
 					$action = "edit/edit_association.php?id={$_GET['id']}";
 					$buttonText = "apply"; 
@@ -56,6 +56,22 @@ else
 					}
 				
 				}
+				else if(isset($_GET['id']) && isset($_GET['name']))
+				{
+					$action = "edit/edit_association.php?id={$_GET['id']}";
+					$buttonText = "apply"; 
+					
+					$associationName = $_GET['name'];
+					$associationDescription = $_GET['description'];
+				}
+				else if(!isset($_GET['id']) && isset($_GET['name']))
+				{
+					$action = "add/add_association.php";
+					$buttonText = "add"; 
+					
+					$associationName = $_GET['name'];
+					$associationDescription = $_GET['description'];
+				}
 				else
 				{
 					$action = "add/add_association.php";
@@ -66,7 +82,29 @@ else
 			?>
 				
 			 <form method="post" action="<?php echo $action ?>">
-					<input type="text" name="name" value="<?php echo $associationName  ?>" >
-					<input type="text" name="description" value="<?php echo $associationDescription  ?>" >
+					<label>Name<input type="text" name="name" value="<?php echo $associationName  ?>" ></label>
+					<label>Description<input type="text" name="description" value="<?php echo $associationDescription  ?>" ></label>
 					<input type="submit" class="panel_part_small" value="<?php  echo $buttonText  ?>" >
 			</form>
+			<?php
+				if(isset($_SESSION['associationEmptyName']) && $_SESSION['associationEmptyName'] == true ) 
+				{	
+					echo "Empty Name";
+					$_SESSION['associationEmptyName'] = false;
+				}
+				else if(isset($_SESSION['associationBadName']) && $_SESSION['associationBadName'] == false) 
+				{	
+					echo "Name schould be string";
+					$_SESSION['associationBadName'] = true;
+				}
+				if(isset($_SESSION['associationEmptyDescription']) && $_SESSION['associationEmptyDescription'] == true ) 
+				{	
+					echo "Empty Description ";
+					$_SESSION['associationEmptyDescription'] = false;
+				}
+				else if(isset($_SESSION['associationBadDescription']) && $_SESSION['associationBadDescription'] == false) 
+				{	
+					echo "description schould be string";
+					$_SESSION['associationBadDescription'] = true;
+				}
+			?>

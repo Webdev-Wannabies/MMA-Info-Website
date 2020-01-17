@@ -1,7 +1,7 @@
 <?php
 
 require_once 'database.php';
-$good = true;
+
 
 if(isset($_SESSION['logged_id']))
 {
@@ -20,91 +20,6 @@ if(isset($_SESSION['logged_id']))
 	
 	$assQuery = $db->query('SELECT * FROM associations');
 	$associations = $assQuery->fetchAll();
-	if(isset($_POST['first_name']))
-	{
-		require_once 'validation.php';
-		
-		$good = true;
-		if(empty($_POST['first_name']))
-		{
-			$good = false;
-			$efirstName = true;
-		}
-		else
-		{
-		    if(!checkString($_POST['first_name']))
-			{
-				$good = false;
-				$vfirstName = true;
-			}
-		}
-		
-		if(empty($_POST['last_name']))
-		{
-			$good = false;
-			$elastName = true;
-		}
-		else
-		{
-			if(!checkString($_POST['last_name']))
-			{
-				$good = false;
-				$vlastName = true;
-			}
-		}
-		
-		if(empty($_POST['nickname']))
-		{
-			$good = false;
-			$enickName = true;
-		}
-		else
-		{
-			if(!checkString($_POST['nickname']))
-			{
-				$good = false;
-				$vnickName = true;
-			}
-		}
-		
-		if(empty($_POST['height']))
-		{
-			$good = false;
-			$eheight = true;
-		}
-		else
-		{
-			if(!checkDecimal($_POST['height']))
-			{
-				$good = false;
-				$vheight = true;
-			}
-		}
-		
-		if(empty($_POST['weight']))
-		{
-			$good = false;
-			$eweight = true;
-		}
-		else
-		{
-			if(!checkDecimal($_POST['weight']))
-			{
-				$good = false;
-				$vweight = true;
-			}
-		}
-			
-		if($good)
-		{
-			if($_GET['id'])
-				header("Location: edit/edit_fighter.php?id={$_GET['id']}&first_name={$_POST['first_name']}&last_name={$_POST['last_name']}&nickname={$_POST['nickname']}&birthdate={$_POST['birthdate']}&height={$_POST['height']}&weight={$_POST['weight']}&country_id={$_POST['country_id']}&association_id={$_POST['association_id']}&gender={$_POST['gender']}");
-		    else
-				header("Location: add/add_fighter.php?first_name={$_POST['first_name']}&last_name={$_POST['last_name']}&nickname={$_POST['nickname']}&birthdate={$_POST['birthdate']}&height={$_POST['height']}&weight={$_POST['weight']}&country_id={$_POST['country_id']}&association_id={$_POST['association_id']}&gender={$_POST['gender']}"); 
-		    exit();
-		}
-			
-	}
 } 
 else
 {
@@ -156,7 +71,7 @@ else
 			</table>
 			
 			<?php		
-				if(isset($_GET['id']))
+				if(isset($_GET['id']) && !isset($_GET['first_name']))
 				{			
 					$action = "edit/edit_fighter.php?id={$_GET['id']}";
 					$buttonText = "apply"; 
@@ -180,22 +95,35 @@ else
 					}
 				
 				}
-				else if($good == false)
+				else if(isset($_GET['id']) && isset($_GET['first_name']))
 				{
-					$buttonText = "zly";
-					if(isset($_GET['id']))
-						$id = $_GET['id'];
-					else
-						$id = "";
-					$firstname = $_POST['first_name'];
-					$lastname = $_POST['last_name'];
-					$nickname = $_POST['nickname'];
-					$gender = $fighter['gender'];
-					$birthdate = $_POST['birthdate'];
-					$weight = $_POST['weight'];
-					$height = $_POST['height'];
-					$country = $_POST['country_id'];
-					$association = $_POST['association_id'];
+					$action = "edit/edit_fighter.php?id={$_GET['id']}";
+					$buttonText = "apply"; 
+					
+					$firstname = $_GET['first_name'];
+					$lastname = $_GET['last_name'];
+					$nickname = $_GET['nickname'];
+					$gender = $_GET['gender'];
+					$birthdate = $_GET['birthdate'];
+					$weight = $_GET['weight'];
+					$height = $_GET['height'];
+					$country = $_GET['country_id'];
+					$association = $_GET['association_id'];
+				}
+				else if(!isset($_GET['id']) && isset($_GET['first_name']))
+				{
+					$action = "add/add_fighter.php";
+					$buttonText = "add";
+					
+					$firstname = $_GET['first_name'];
+					$lastname = $_GET['last_name'];
+					$nickname = $_GET['nickname'];
+					$gender = $_GET['gender'];
+					$birthdate = $_GET['birthdate'];
+					$weight = $_GET['weight'];
+					$height = $_GET['height'];
+					$country = $_GET['country_id'];
+					$association = $_GET['association_id'];
 				}
 				else
 				{
@@ -216,7 +144,7 @@ else
 			?>
 				
 			 
-			 <form method="post">
+			 <form method="post" action="<?php echo $action ?>">
 					<input type="text" name="first_name" value="<?php echo $firstname ?>" >
 					<input type="text" name="last_name" value="<?php echo $lastname ?>" >
 					<input type="text" name="nickname" value="<?php echo $nickname ?>" >
@@ -239,59 +167,55 @@ else
 					<input type="submit"  class="panel_part_small" value="<?php echo $buttonText  ?>" >
 			</form>
 			<?php
-			echo"";
-			    if(isset($efirstName))
-				{
-					echo "empty first name<br>";
-					$efirstName = false;
+			    if(isset($_SESSION['fighterEmptyFirstName']) && $_SESSION['fighterEmptyFirstName'] == true ) 
+				{	
+					echo "Empty first name";
+					$_SESSION['fighterEmptyFirstName'] = false;
 				}
-				if(isset($vfirstName))
-				{
-					echo "first name should be string<br>";
-				    $vfirstName = false;
+				else if(isset($_SESSION['fighterBadFirstName']) && $_SESSION['fighterBadFirstName'] == false) 
+				{	
+					echo "First name schould be decimal value with dot";
+					$_SESSION['fighterBadFirstName'] = true;
 				}
-				if(isset($elastName))
-				{
-					echo "empty last name<br>";
-					$elastName =  false;
+				if(isset($_SESSION['fighterEmptyLastName']) && $_SESSION['fighterEmptyLastName'] == true ) 
+				{	
+					echo "Empty last name ";
+					$_SESSION['fighterEmptyLastName'] = false;
 				}
-				if(isset($vlastName))
-				{
-					echo "last name should be string<br>";
-					$vlastName = false;
+				else if(isset($_SESSION['fighterBadLastName']) && $_SESSION['fighterBadLastName'] == false) 
+				{	
+					echo "Last name schould be decimal value with dot";
+					$_SESSION['fighterBadLastName'] = true;
 				}
-				if(isset($enickName))
-				{
-					echo "empty nickname<br>";
-				    $enickName = false;
+				if(isset($_SESSION['fighterEmptyNickName']) && $_SESSION['fighterEmptyNickName'] == true ) 
+				{	
+					echo "Empty nickname ";
+					$_SESSION['fighterEmptyNickName'] = false;
 				}
-				if(isset($vnickName))
-				{
-					echo "nickname should be string <br>";
-					$vnickName = false;
+				else if(isset($_SESSION['fighterBadNickName']) && $_SESSION['fighterBadNickName'] == false) 
+				{	
+					echo "Nickname schould be string";
+					$_SESSION['fighterBadNickName'] = true;
 				}
-				if(isset($eheight))
-				{
-					$eheight = false;
-					echo "empty height<br>";
+				if(isset($_SESSION['fighterEmptyHeight']) && $_SESSION['fighterEmptyHeight'] == true ) 
+				{	
+					echo "Empty height ";
+					$_SESSION['fighterEmptyHeight'] = false;
 				}
-				if(isset($vheight))
-				{
-					$vheight = false;
-					echo "height should be decimal value with dot<br>";
+				else if(isset($_SESSION['fighterBadHeight']) && $_SESSION['fighterBadHeight'] == false) 
+				{	
+					echo "height schould be decimal value with dot";
+					$_SESSION['fighterBadHeight'] = true;
 				}
-				if(isset($eweight))
-				{
-					$eweight = false;
-					echo "empty weight<br>";
+				if(isset($_SESSION['fighterEmptyWeight']) && $_SESSION['fighterEmptyWeight'] == true ) 
+				{	
+					echo "Empty weight ";
+					$_SESSION['fighterEmptyWeight'] = false;
 				}
-				if(isset($vweight))
-				{
-					$vweight = false;
-					echo "weight should be decimal value with dot<br>";
+				else if(isset($_SESSION['fighterBadWeight']) && $_SESSION['fighterBadWeight'] == false) 
+				{	
+					echo "Weight schould be decimal value with dot";
+					$_SESSION['fighterBadWeight'] = true;
 				}
-				
-					
-			
 			?>
 			

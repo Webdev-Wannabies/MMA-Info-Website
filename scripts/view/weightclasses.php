@@ -10,6 +10,12 @@ if(isset($_SESSION['logged_id']))
 	
 	$orgQuery = $db->query('SELECT * FROM organizations');
 	$organizations = $orgQuery->fetchAll();
+	
+	if(isset($_GET['id']))
+	{
+		$organizationIdQuery = $db->query('Select organization_id from weightclasses where id = ' .$_GET['id']);
+		$organizationId = $organizationIdQuery->fetch(); 
+	}
 } 
 else
 {
@@ -44,7 +50,7 @@ else
 			</table>
 			
 			<?php		
-				if(isset($_GET['id']))
+				if(isset($_GET['id']) && !isset($_GET['lower_limit']))
 				{			
 					$action = "edit/edit_weightclass.php?id={$_GET['id']}";
 					$buttonText = "apply"; 
@@ -54,8 +60,8 @@ else
 						if($weightclass['id'] == $_GET['id'] )
 						{
 							$id = $weightclass['id'];
-							$firstname = $weightclass['lower_limit'];
-							$lastname = $weightclass['upper_limit'];
+							$lower_limit = $weightclass['lower_limit'];
+							$upper_limit = $weightclass['upper_limit'];
 							$name = $weightclass['name'];
 							$org = $weightclass['org'];
 			
@@ -63,14 +69,34 @@ else
 					}
 				
 				}
+				else if(isset($_GET['id']) && isset($_GET['lower_limit']))
+				{
+					$action = "edit/edit_weightclass.php?id={$_GET['id']}";
+					$buttonText = "apply"; 
+					
+					$lower_limit = $_GET['lower_limit'];
+					$upper_limit = $_GET['upper_limit'];
+					$name = $_GET['name'];
+					$org = $_GET['organization_id'];
+				}
+				else if(!isset($_GET['id']) && isset($_GET['lower_limit']))
+				{
+					$action = "add/add_weightclass.php";
+					$buttonText = "add"; 
+					
+					$lower_limit = $_GET['lower_limit'];
+					$upper_limit = $_GET['upper_limit'];
+					$name = $_GET['name'];
+					$org = $_GET['organization_id'];
+				}
 				else
 				{
  					$action = "add/add_weightclass.php";
 					$buttonText = "add";
 					
 					$id = "";
-					$firstname = "";
-					$lastname = "";
+					$lower_limit = "";
+					$upper_limit = "";
 					$name = "";
 					$org = "";
 					
@@ -79,15 +105,47 @@ else
 			?>
 				
 			 <form method="post" action="<?php echo $action ?>">
-					<input type="text" name="lower_limit" value="<?php echo $firstname ?>" >
-					<input type="text" name="upper_limit" value="<?php echo $lastname ?>" >
-					<input type="text" name="name" value="<?php echo $name ?>" >
+					<label>Lower limit<input type="text" name="lower_limit" value="<?php echo $lower_limit ?>" ></label>
+					<label>Upper limit<input type="text" name="upper_limit" value="<?php echo $upper_limit ?>" ></label>
+					<label>Name<input type="text" name="name" value="<?php echo $name ?>" ></label>
 					
-					<select name="organization_id" > organization </option>
+					<label>Organization<select name="organization_id" > organization </option>
 						<?php foreach ($organizations as $organization): ?>
-								<option value= "<?php echo $organization['id'] ?>" > <?php echo $organization['name'] ?> </option>
+								<option <?php if(isset($_GET['id']) && $organization['id']==$organizationId['organization_id'])echo"selected"; ?> value= "<?php echo $organization['id'] ?>" > <?php echo $organization['name'] ?> </option>
 						<?php endforeach ?>
-					</select>
+					</select></label>
 					
 					<input type="submit" class="panel_part_small" value="<?php  echo $buttonText  ?>" >
 			</form>
+			<?php
+				if(isset($_SESSION['weightclassEmptyLowerLimit']) && $_SESSION['weightclassEmptyLowerLimit'] == true ) 
+				{	
+					echo "Empty lower  limit";
+					$_SESSION['weightclassEmptyLowerLimit'] = false;
+				}
+				else if(isset($_SESSION['weightclassBadLowerLimit']) && $_SESSION['weightclassBadLowerLimit'] == false) 
+				{	
+					echo "lower limit schould be decimal value with dot";
+					$_SESSION['weightclassBadLowerLimit'] = true;
+				}
+				if(isset($_SESSION['weightclassEmptyUpperLimit']) && $_SESSION['weightclassEmptyUpperLimit'] == true ) 
+				{	
+					echo "Empty upper limit ";
+					$_SESSION['weightclassEmptyUpperLimit'] = false;
+				}
+				else if(isset($_SESSION['weightclassBadUpperLimit']) && $_SESSION['weightclassBadUpperLimit'] == false) 
+				{	
+					echo "upper limit schould be decimal value with dot";
+					$_SESSION['weightclassBadUpperLimit'] = true;
+				}
+				if(isset($_SESSION['weightclassEmptyName']) &&$_SESSION['weightclassEmptyName'] == true ) 
+				{	
+					echo "Empty name ";
+					$_SESSION['weightclassEmptyName'] = false;
+				}
+				else if(isset($_SESSION['weightclassBadName']) && $_SESSION['weightclassBadName'] == false) 
+				{	
+					echo "name schould be string";
+					$_SESSION['weightclassBadName'] = true;
+				}
+			?>

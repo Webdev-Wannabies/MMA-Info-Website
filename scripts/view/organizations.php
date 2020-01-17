@@ -41,7 +41,7 @@ else
 			</table>
 			
 			<?php		
-				if(isset($_GET['id']))
+				if(isset($_GET['id']) && !isset($_GET['name']))
 				{			
 					$action = "edit/edit_organization.php?id={$_GET['id']}";
 					$buttonText = "apply"; 
@@ -55,6 +55,22 @@ else
 						}
 					}
 				
+				}
+				else if(isset($_GET['id']) && isset($_GET['name']))
+				{
+					$action = "edit/edit_organization.php?id={$_GET['id']}";
+					$buttonText = "apply"; 
+					
+					$associationName = $_GET['name'];
+					$associationDescription = $_GET['description'];
+				}
+				else if(!isset($_GET['id']) && isset($_GET['name']))
+				{
+					$action = "add/add_organization.php";
+					$buttonText = "add"; 
+					
+					$associationName = $_GET['name'];
+					$associationDescription = $_GET['description'];
 				}
 				else
 				{
@@ -70,3 +86,25 @@ else
 					<input type="text" name="description" value="<?php echo $associationDescription  ?>" >
 					<input type="submit" class="panel_part_small" value="<?php  echo $buttonText  ?>" >
 			</form>
+			<?php
+				if(isset($_SESSION['organizationEmptyName']) && $_SESSION['organizationEmptyName'] == true ) 
+				{	
+					echo "Empty Name";
+					$_SESSION['organizationEmptyName'] = false;
+				}
+				else if(isset($_SESSION['organizationBadName']) && $_SESSION['organizationBadName'] == false) 
+				{	
+					echo "Name schould be string";
+					$_SESSION['organizationBadName'] = true;
+				}
+				if(isset($_SESSION['organizationEmptyDescription']) && $_SESSION['organizationEmptyDescription'] == true ) 
+				{	
+					echo "Empty Description ";
+					$_SESSION['organizationEmptyDescription'] = false;
+				}
+				else if(isset($_SESSION['organizationBadDescription']) && $_SESSION['organizationBadDescription'] == false) 
+				{	
+					echo "description schould be string";
+					$_SESSION['organizationBadDescription'] = true;
+				}
+			?>

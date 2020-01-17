@@ -16,6 +16,12 @@ if(isset($_SESSION['logged_id']))
 	
 	$orgQuery = $db->query('SELECT * FROM organizations');
 	$organizations = $orgQuery->fetchAll();
+	
+	if(isset($_GET['id']))
+	{
+		$oneEventQuery = $db->query('Select location_id, organization_id from events where id = ' .$_GET['id']);
+		$oneEvent = $oneEventQuery->fetch(); 
+	}
 } 
 else
 {
@@ -50,7 +56,7 @@ else
 			</table>
 			
 			<?php		
-				if(isset($_GET['id']))
+				if(isset($_GET['id']) && !isset($_GET['name']))
 				{			
 					$action = "edit/edit_event.php?id={$_GET['id']}";
 					$buttonText = "apply"; 
@@ -68,6 +74,27 @@ else
 						}
 					}
 				
+				}
+				else if(isset($_GET['id']) && isset($_GET['name']))
+				{
+					$action = "edit/edit_event.php?id={$_GET['id']}";
+					$buttonText = "apply"; 
+					
+					$id = $_GET['id'];
+					$name = $_GET['name'];
+					$date = $_GET['date'];
+					$location_id = $_GET['location_id'];
+				    $orgganization_id = $_GET['organization_id'];
+				}
+				else if(!isset($_GET['id']) && isset($_GET['name']))
+				{
+					$action = "add/add_event.php";
+					$buttonText = "add";
+			
+					$name = $_GET['name'];
+					$date = $_GET['date'];
+					$location_id = $_GET['location_id'];
+				    $orgganization_id = $_GET['organization_id'];
 				}
 				else
 				{
@@ -90,15 +117,27 @@ else
 					
 					<select name="location_id" > location </option>
 						<?php foreach ($locations as $location): ?>
-								<option value= "<?php echo $location['id'] ?>" > <?php echo $location['city'] . ", " . $location['name']?> </option>
+								<option <?php if(isset($_GET['id']) && $oneEvent['location_id'] == $location['id']) echo "selected"; ?> value= "<?php echo $location['id'] ?>" > <?php echo $location['city'] . ", " . $location['name']?> </option>
 						<?php endforeach ?>
 					</select>
 					<select name="organization_id" > organization </option>
 						<?php foreach ($organizations as $organization): ?>
-								<option value= "<?php echo $organization['id'] ?>" > <?php echo $organization['name'] ?> </option>
+								<option <?php if(isset($_GET['id']) && $oneEvent['organization_id'] == $organization['id']) echo "selected"; ?> value= "<?php echo $organization['id'] ?>" > <?php echo $organization['name'] ?> </option>
 						<?php endforeach ?>
 					</select>
 					
 					<input type="submit" class="panel_part_small" value="<?php  echo $buttonText  ?>" >
 			</form>
+			<?php
+				if(isset($_SESSION['eventEmptyName']) && $_SESSION['eventEmptyName'] == true ) 
+				{	
+					echo "Empty Name";
+					$_SESSION['eventEmptyName'] = false;
+				}
+				else if(isset($_SESSION['eventBadName']) && $_SESSION['eventBadName'] == false) 
+				{	
+					echo "Name schould be string";
+					$_SESSION['eventBadName'] = false;
+				}
+			?>
 			
