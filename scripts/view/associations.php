@@ -89,12 +89,12 @@ else
 			<?php
 				if(isset($_SESSION['associationEmptyName']) && $_SESSION['associationEmptyName'] == true ) 
 				{	
-					echo "Empty Name";
+					echo "Empty Association Name <br>";
 					$_SESSION['associationEmptyName'] = false;
 				}
 				else if(isset($_SESSION['associationBadName']) && $_SESSION['associationBadName'] == false) 
 				{	
-					echo "Name schould be string";
+					echo "Name schould be string <br>";
 					$_SESSION['associationBadName'] = true;
 				}
 				if(isset($_SESSION['associationEmptyDescription']) && $_SESSION['associationEmptyDescription'] == true ) 

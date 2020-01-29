@@ -6,7 +6,7 @@ require_once 'database.php';
 if(isset($_SESSION['logged_id']))
 {
 	$fightersQuery = $db->query('SELECT fighters.id, fighters.first_name, fighters.last_name, fighters.nickname, fighters.gender,
-                                  fighters.birthdate, fighters.height, fighters.weight, countries.name countryname,
+                                  fighters.birthdate, fighters.height, fighters.country_id, fighters.association_id, fighters.weight, countries.name countryname,
 								  associations.name asocname
 								  FROM fighters LEFT JOIN countries ON fighters.country_id = countries.id 
 								  LEFT JOIN associations ON fighters.association_id = associations.id');
@@ -20,6 +20,8 @@ if(isset($_SESSION['logged_id']))
 	
 	$assQuery = $db->query('SELECT * FROM associations');
 	$associations = $assQuery->fetchAll();
+	
+	
 } 
 else
 {
@@ -75,6 +77,7 @@ else
 				{			
 					$action = "edit/edit_fighter.php?id={$_GET['id']}";
 					$buttonText = "apply"; 
+					
 						
 					foreach ($fighters as $fighter) 
 					{
@@ -88,8 +91,8 @@ else
 							$birthdate = $fighter['birthdate'];
 							$weight = $fighter['weight'];
 							$height = $fighter['height'];
-							$country = $fighter['countryname'];
-							$association = $fighter['asocname'];
+							$country = $fighter['country_id'];
+							$association = $fighter['association_id'];
 							
 						}
 					}
@@ -138,6 +141,7 @@ else
 					$birthdate = "";
 					$weight = "";
 					$height = "";
+					$country ="";
 					$association = "";
 
 				}
@@ -145,23 +149,24 @@ else
 				
 			 
 			 <form method="post" action="<?php echo $action ?>">
-					<input type="text" name="first_name" value="<?php echo $firstname ?>" >
-					<input type="text" name="last_name" value="<?php echo $lastname ?>" >
-					<input type="text" name="nickname" value="<?php echo $nickname ?>" >
-					<input type="date" name="birthdate" value="<?php echo $birthdate ?>" >
-					<input type="radio" name="gender" value="M" <?php if( $gender == 'M' ) echo 'checked'; ?> >M
-					<input type="radio" name="gender" value="F" <?php if( $gender == 'F' ) echo 'checked'; ?>>F
-					<input type="text" name="height" value="<?php echo $height ?>" >
-					<input type="text" name="weight" value="<?php echo $weight ?>" >
+					<label>First Name<input type="text" name="first_name" value="<?php echo $firstname ?>" ></label>
+					<label>Last Name<input type="text" name="last_name" value="<?php echo $lastname ?>" ></label>
+					<label>Nick Name<input type="text" name="nickname" value="<?php echo $nickname ?>" ></label>
+					<label>Birthdate<input type="date" name="birthdate" value="<?php echo $birthdate ?>" >
+					<label>Gender<input type="radio" name="gender" value="M" <?php if( $gender == 'M' ) echo 'checked'; ?> >M</label>
+					<input type="radio" name="gender" value="F" <?php if( $gender == 'F' ) echo 'checked'; ?>>F</label>
+					<label>Height<input type="text" name="height" value="<?php echo $height ?>" ></label>
+					<label>Weight<input type="text" name="weight" value="<?php echo $weight ?>" ></label>
 					
-					<select name="country_id" > country </option>
-						<?php foreach ($countries as $country): ?>
-								<option value= "<?php echo $country['id'] ?>" > <?php echo $country['name'] ?> </option>
+					<select name="country_id" > <option value="0"> Country </option>
+						<?php foreach ($countries as $countryFE): ?>
+								<option <?php if($countryFE['id'] == $country) echo "selected";?> value= "<?php echo $countryFE['id'] ?>" > <?php echo $countryFE['name'] ?> </option>
 						<?php endforeach ?>
 					</select>
-					<select name="association_id" > association </option>
-						<?php foreach ($associations as $association): ?>
-								<option value= "<?php echo $association['id'] ?>" > <?php echo $association['name'] ?> </option>
+					<select name="association_id" > association <option value="0"> Association</option>
+						<?php foreach ($associations as $associationFE): ?>
+						        <?php echo $association . "association   associationFE" . $associationFE['id']; ?>   
+								<option <?php if($associationFE['id']==$association) echo "selected";?> value= "<?php echo $associationFE['id'] ?>" > <?php echo $associationFE['name'] ?> </option>
 						<?php endforeach ?>
 					</select>
 					<input type="submit"  class="panel_part_small" value="<?php echo $buttonText  ?>" >
@@ -169,52 +174,62 @@ else
 			<?php
 			    if(isset($_SESSION['fighterEmptyFirstName']) && $_SESSION['fighterEmptyFirstName'] == true ) 
 				{	
-					echo "Empty first name";
+					echo "Empty first name<br>";
 					$_SESSION['fighterEmptyFirstName'] = false;
 				}
 				else if(isset($_SESSION['fighterBadFirstName']) && $_SESSION['fighterBadFirstName'] == false) 
 				{	
-					echo "First name schould be decimal value with dot";
+					echo "First name schould be decimal value with dot<br>";
 					$_SESSION['fighterBadFirstName'] = true;
 				}
 				if(isset($_SESSION['fighterEmptyLastName']) && $_SESSION['fighterEmptyLastName'] == true ) 
 				{	
-					echo "Empty last name ";
+					echo "Empty last name <br>";
 					$_SESSION['fighterEmptyLastName'] = false;
 				}
 				else if(isset($_SESSION['fighterBadLastName']) && $_SESSION['fighterBadLastName'] == false) 
 				{	
-					echo "Last name schould be decimal value with dot";
+					echo "Last name schould be decimal value with dot<br>";
 					$_SESSION['fighterBadLastName'] = true;
 				}
 				if(isset($_SESSION['fighterEmptyNickName']) && $_SESSION['fighterEmptyNickName'] == true ) 
 				{	
-					echo "Empty nickname ";
+					echo "Empty nickname <br>";
 					$_SESSION['fighterEmptyNickName'] = false;
 				}
 				else if(isset($_SESSION['fighterBadNickName']) && $_SESSION['fighterBadNickName'] == false) 
 				{	
-					echo "Nickname schould be string";
+					echo "Nickname schould be string<br>";
 					$_SESSION['fighterBadNickName'] = true;
+				}
+				if(isset($_SESSION['fightBadDate']) && $_SESSION['fightBadDate'] == true ) 
+				{	
+					echo "Empty birthdate <br>";
+					$_SESSION['fightBadDate'] = false;
 				}
 				if(isset($_SESSION['fighterEmptyHeight']) && $_SESSION['fighterEmptyHeight'] == true ) 
 				{	
-					echo "Empty height ";
+					echo "Empty height <br>";
 					$_SESSION['fighterEmptyHeight'] = false;
 				}
 				else if(isset($_SESSION['fighterBadHeight']) && $_SESSION['fighterBadHeight'] == false) 
 				{	
-					echo "height schould be decimal value with dot";
+					echo "Height schould be decimal value with dot<br>";
 					$_SESSION['fighterBadHeight'] = true;
 				}
+				if(isset($_SESSION['fightNoGender']) && $_SESSION['fightNoGender'] == true)
+				{
+					echo "Choose Gender <br> ";
+					$_SESSION['fightNoGender'] == false;
+				}					
 				if(isset($_SESSION['fighterEmptyWeight']) && $_SESSION['fighterEmptyWeight'] == true ) 
 				{	
-					echo "Empty weight ";
+					echo "Empty weight<br> ";
 					$_SESSION['fighterEmptyWeight'] = false;
 				}
 				else if(isset($_SESSION['fighterBadWeight']) && $_SESSION['fighterBadWeight'] == false) 
 				{	
-					echo "Weight schould be decimal value with dot";
+					echo "Weight schould be decimal value with dot<br>";
 					$_SESSION['fighterBadWeight'] = true;
 				}
 			?>

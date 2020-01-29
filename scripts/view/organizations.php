@@ -82,29 +82,29 @@ else
 			?>
 				
 			 <form method="post" action="<?php echo $action ?>">
-					<input type="text" name="name" value="<?php echo $associationName  ?>" >
-					<input type="text" name="description" value="<?php echo $associationDescription  ?>" >
+					<label>Name<input type="text" name="name" value="<?php echo $associationName  ?>" ></label>
+					<label>Description<input type="text" name="description" value="<?php echo $associationDescription  ?>" ></label>
 					<input type="submit" class="panel_part_small" value="<?php  echo $buttonText  ?>" >
 			</form>
 			<?php
 				if(isset($_SESSION['organizationEmptyName']) && $_SESSION['organizationEmptyName'] == true ) 
 				{	
-					echo "Empty Name";
+					echo "Empty Organization Name <br>";
 					$_SESSION['organizationEmptyName'] = false;
 				}
 				else if(isset($_SESSION['organizationBadName']) && $_SESSION['organizationBadName'] == false) 
 				{	
-					echo "Name schould be string";
+					echo "Organization Name schould be string <br>";
 					$_SESSION['organizationBadName'] = true;
 				}
 				if(isset($_SESSION['organizationEmptyDescription']) && $_SESSION['organizationEmptyDescription'] == true ) 
 				{	
-					echo "Empty Description ";
+					echo "Empty Organization Description ";
 					$_SESSION['organizationEmptyDescription'] = false;
 				}
 				else if(isset($_SESSION['organizationBadDescription']) && $_SESSION['organizationBadDescription'] == false) 
 				{	
-					echo "description schould be string";
+					echo "Organization description schould be string";
 					$_SESSION['organizationBadDescription'] = true;
 				}
 			?>

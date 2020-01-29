@@ -86,7 +86,7 @@ else
 			<?php
 				if(isset($_SESSION['countryEmptyName']) && $_SESSION['countryEmptyName'] == true ) 
 				{	
-					echo "Empty Name";
+					echo "Empty Name ";
 					$_SESSION['countryEmptyName'] = false;
 				}
 				else if(isset($_SESSION['countryBadName']) && $_SESSION['countryBadName'] == false) 

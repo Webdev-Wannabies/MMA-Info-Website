@@ -4,7 +4,7 @@ require_once 'database.php';
 
 if(isset($_SESSION['logged_id']))
 {
-	$eventsQuery = $db->query('SELECT events.id, events.name event_name, events.date, locations.id loc_id, locations.city, countries.name, organizations.name org
+	$eventsQuery = $db->query('SELECT events.id, events.name event_name, events.date, events.location_id, locations.id loc_id, locations.city, countries.name, events.organization_id, organizations.name org
 								  FROM events LEFT JOIN organizations ON events.organization_id = organizations.id
                                   LEFT JOIN locations ON events.location_id = locations.id
 								  LEFT JOIN countries ON countries.id = locations.country_id');
@@ -68,8 +68,8 @@ else
 							$id = $event['id'];
 							$name = $event['event_name'];
 							$date = $event['date'];
-							$location_id = $event['loc_id'];
-							$orgganization_id = $event['org'];
+							$location_id = $event['location_id'];
+							$orgganization_id = $event['organization_id'];
 			
 						}
 					}
@@ -112,17 +112,17 @@ else
 			?>
 				
 			 <form method="post" action="<?php echo $action ?>">
-					<input type="text" name="name" value="<?php echo $name ?>" >
-					<input type="date" name="date" value="<?php echo $date ?>" >
+					<label>Event name<input type="text" name="name" value="<?php echo $name ?>" ></label>
+					<label>Date<input type="date" name="date" value="<?php echo $date ?>" ></label>
 					
-					<select name="location_id" > location </option>
+					<select name="location_id" > <oprion> Location </option>
 						<?php foreach ($locations as $location): ?>
-								<option <?php if(isset($_GET['id']) && $oneEvent['location_id'] == $location['id']) echo "selected"; ?> value= "<?php echo $location['id'] ?>" > <?php echo $location['city'] . ", " . $location['name']?> </option>
+								<option <?php if($location_id == $location['id']) echo "selected"; ?> value= "<?php echo $location['id'] ?>" > <?php echo $location['city'] . ", " . $location['name']?> </option>
 						<?php endforeach ?>
 					</select>
-					<select name="organization_id" > organization </option>
+					<select name="organization_id" > <option>Organization </option>
 						<?php foreach ($organizations as $organization): ?>
-								<option <?php if(isset($_GET['id']) && $oneEvent['organization_id'] == $organization['id']) echo "selected"; ?> value= "<?php echo $organization['id'] ?>" > <?php echo $organization['name'] ?> </option>
+								<option <?php if($orgganization_id == $organization['id']) echo "selected"; ?> value= "<?php echo $organization['id'] ?>" > <?php echo $organization['name'] ?> </option>
 						<?php endforeach ?>
 					</select>
 					
@@ -131,13 +131,18 @@ else
 			<?php
 				if(isset($_SESSION['eventEmptyName']) && $_SESSION['eventEmptyName'] == true ) 
 				{	
-					echo "Empty Name";
+					echo "Empty event name <br>";
 					$_SESSION['eventEmptyName'] = false;
 				}
 				else if(isset($_SESSION['eventBadName']) && $_SESSION['eventBadName'] == false) 
 				{	
-					echo "Name schould be string";
-					$_SESSION['eventBadName'] = false;
+					echo "Name schould be string <br>";
+					$_SESSION['eventBadName'] = true;
+				}
+				if(isset($_SESSION['eventBadNDate']) && $_SESSION['eventBadNDate'] == true) 
+				{	
+					echo "Date is not selected";
+					$_SESSION['eventBadNDate'] = false;
 				}
 			?>
 			

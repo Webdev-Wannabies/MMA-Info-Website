@@ -109,11 +109,11 @@ else
 					<label>Upper limit<input type="text" name="upper_limit" value="<?php echo $upper_limit ?>" ></label>
 					<label>Name<input type="text" name="name" value="<?php echo $name ?>" ></label>
 					
-					<label>Organization<select name="organization_id" > organization </option>
+					<select name="organization_id" > <option> Organization </option>
 						<?php foreach ($organizations as $organization): ?>
 								<option <?php if(isset($_GET['id']) && $organization['id']==$organizationId['organization_id'])echo"selected"; ?> value= "<?php echo $organization['id'] ?>" > <?php echo $organization['name'] ?> </option>
 						<?php endforeach ?>
-					</select></label>
+					</select>
 					
 					<input type="submit" class="panel_part_small" value="<?php  echo $buttonText  ?>" >
 			</form>
@@ -125,7 +125,7 @@ else
 				}
 				else if(isset($_SESSION['weightclassBadLowerLimit']) && $_SESSION['weightclassBadLowerLimit'] == false) 
 				{	
-					echo "lower limit schould be decimal value with dot";
+					echo "Lower limit schould be decimal value with dot";
 					$_SESSION['weightclassBadLowerLimit'] = true;
 				}
 				if(isset($_SESSION['weightclassEmptyUpperLimit']) && $_SESSION['weightclassEmptyUpperLimit'] == true ) 
@@ -135,17 +135,17 @@ else
 				}
 				else if(isset($_SESSION['weightclassBadUpperLimit']) && $_SESSION['weightclassBadUpperLimit'] == false) 
 				{	
-					echo "upper limit schould be decimal value with dot";
+					echo "Upper limit schould be decimal value with dot";
 					$_SESSION['weightclassBadUpperLimit'] = true;
 				}
 				if(isset($_SESSION['weightclassEmptyName']) &&$_SESSION['weightclassEmptyName'] == true ) 
 				{	
-					echo "Empty name ";
+					echo "Empty weightclass name ";
 					$_SESSION['weightclassEmptyName'] = false;
 				}
 				else if(isset($_SESSION['weightclassBadName']) && $_SESSION['weightclassBadName'] == false) 
 				{	
-					echo "name schould be string";
+					echo "Wightclass name schould be string";
 					$_SESSION['weightclassBadName'] = true;
 				}
 			?>

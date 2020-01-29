@@ -108,7 +108,7 @@ else
 						
 						if(isset($_SESSION['locationEmptyName']) && $_SESSION['locationEmptyName'] == true ) 
 						{	
-							echo "Empty Name";
+							echo "Empty Location Name";
 							$_SESSION['locationEmptyName'] = false;
 						}
 						else if(isset($_SESSION['locationBadName']) && $_SESSION['locationBadName'] == false) 

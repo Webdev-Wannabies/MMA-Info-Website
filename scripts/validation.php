@@ -31,4 +31,21 @@ function checkFighters($f1, $f2, $winner)
 	else 
 		return false;
 }
+
+function checkFormDate($ddd)
+{
+	if($ddd == "")
+		return true;
+	else
+		return false;		
+}
+
+function checkGender($gender)
+{
+	if($gender != "M" && $gender != "F")
+			return true;
+	else
+		return false;	
+}
+
 ?>
