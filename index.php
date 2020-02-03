@@ -71,11 +71,13 @@ if( isset( $_GET['search'] ) )
 <body>
 	<div class="row row-top">
 		<div class="col-12 col-s-12">
-			<img src="img/banner.png" class="banner" />
+			<a href="index.php">
+				<img src="img/banner.png" class="banner" />
+			</a>
 		</div>
 	</div>
 	<div class="row row-middle">
-		<div class="col-2 col-s-2">
+		<div class="col-2 col-s-12 menu">
 		
 			<form method="get" class="search" action="index.php">
 				<input type="text" placeholder="search..." name="search"/>
@@ -86,7 +88,35 @@ if( isset( $_GET['search'] ) )
 			</form>
 			
 			<br/>
-			MENU
+			<a href="index.php">
+				<div class="content_part_short">
+					EVENTS
+				</div>
+			</a>
+			
+			<a href="index.php">
+				<div class="content_part_short">
+					FIGHTERS
+				</div>
+			</a>
+				
+			<a href="index.php">
+				<div class="content_part_short">
+					ASSOCIATIONS
+				</div>
+			</a>
+			
+			<a href="index.php">
+				<div class="content_part_short">
+					ORGANIZATIONS
+				</div>
+			</a>
+			
+			<a href="index.php">
+				<div class="content_part_short">
+					ABOUT
+				</div>
+			</a>
 		</div> 
 		
 		<div class="col-8 col-s-8 content-l">
@@ -115,7 +145,7 @@ if( isset( $_GET['search'] ) )
 			
 			?>
 		</div>
-		<div class="col-2 col-s-2 content-s">
+		<div class="col-2 col-s-4 content-s">
 			<?php
 			if( isset($_GET['type'] ) && isset($_GET['id'] ) )
 			{

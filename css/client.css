@@ -48,8 +48,6 @@ img[type=fighter_profile]
 	
 	float: left;
 	
-	height: 100%;
-	
 	margin: auto;
 	
 }
@@ -68,6 +66,11 @@ img[type=fighter_profile]
   .col-s-10 {width: 83.33%;}
   .col-s-11 {width: 91.66%;}
   .col-s-12 {width: 100%;}
+  
+  [class*="row-"] 
+  {
+	width: 95%;
+  }
 }
 
 @media only screen and (min-width: 600px) 
@@ -84,6 +87,12 @@ img[type=fighter_profile]
   .col-10 {width: 83.33%;}
   .col-11 {width: 91.66%;}
   .col-12 {width: 100%;}
+  
+  [class*="row-"] 
+  {
+	width: 80%;
+  }
+  
 }
 
 [class*="row-"] 
@@ -91,24 +100,12 @@ img[type=fighter_profile]
 	text-align: center;
 	
 	display: table;
-	width: 80%;
-	
 	background-color: black;
 	color: white;
 	
 	margin: auto;
 	
 	border: solid white 2px;
-}
-
-.content-l
-{
-
-}
-
-.content-s
-{
-	
 }
 
 .row-top
@@ -131,6 +128,11 @@ img[type=fighter_profile]
 {
 	height: 10%;
 	
+}
+
+.menu a
+{
+	color: white;
 }
 
 form.search input[type=text]
@@ -166,7 +168,7 @@ form.search button:hover
 }
 
 .content_part_container
-{
+{	
 	position: relative;
 	
 	color: #000000;
@@ -176,6 +178,8 @@ form.search button:hover
 	
 	margin: 0.5%;
 	padding: 0.25%;
+	
+	height: 100%;
 	
 	border: solid red 0.15em;
 }
@@ -200,12 +204,4 @@ form.search button:hover
 {
 	float:right;
 	display:inline;
-}
-
-[type=bottom_right]
-{
-	position: absolute;
-	
-	right: 0;
-	bottom: 0;
 }

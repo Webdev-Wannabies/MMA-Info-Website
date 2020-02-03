@@ -2,7 +2,7 @@
 
 require_once 'scripts/database.php';
 
-$fightsQuery = $db->prepare('SELECT fights.id, F.id fighter_id, CONCAT( F.first_name, F.last_name ) fighter_name, O.id opponent_id, CONCAT( O.first_name, O.last_name ) opponent_name, weightclasses.lower_limit, weightclasses.upper_limit, events.name event_name, result_types.description, result_types.additional_info, W.id winner_id, end_round, end_time 
+$fightsQuery = $db->prepare('SELECT fights.id, F.id fighter_id, CONCAT( F.first_name, " ", F.last_name ) fighter_name, O.id opponent_id, CONCAT( O.first_name, " ", O.last_name ) opponent_name, weightclasses.lower_limit, weightclasses.upper_limit, events.name event_name, result_types.description, result_types.additional_info, W.id winner_id, end_round, end_time 
 								  FROM fights 
 								  LEFT JOIN fighters F ON fights.fighter_id = F.id
 								  LEFT JOIN fighters O ON fights.opponent_id = O.id

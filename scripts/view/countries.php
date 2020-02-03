@@ -91,7 +91,7 @@ else
 				}
 				else if(isset($_SESSION['countryBadName']) && $_SESSION['countryBadName'] == false) 
 				{	
-					echo "Name schould be string";
+					echo "Name schould be a string";
 					$_SESSION['countryBadName'] = true;
 				}
 				
